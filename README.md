@@ -17,3 +17,7 @@ Manual setup is also possible a number of ways. The simplest is likely placing t
 ## Issues
 
 For any problems/bugs/issues/concerns please open an issue in the *Issues* tab above.
+
+## Acknowledgments
+
+This research was supported by the National Science Foundation under grants CMMI-1839378 and CMMI-1839387.
