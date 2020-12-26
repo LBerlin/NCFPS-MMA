@@ -2,7 +2,7 @@
 
 ## Description
 
-NonCommutative Formal Power Series (NCFPS) is a Mathematica-based package for working with series over noncommutative variables.
+NonCommutative Formal Power Series (NCFPS) is a Mathematica-based package for working with series over noncommutative variables. It implements basic algebraic operations like the concatenation product and the shuffle product, as well as special purpose operations used in nonlinear control theory.
 
 ## Documentation
 
