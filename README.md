@@ -6,7 +6,7 @@ NonCommutative Formal Power Series (NCFPS) is a Mathematica-based package for wo
 
 ## Documentation
 
-Descriptions and interactive examples of the included functions are available in the attached [documentation notebook](Documentation/Documentation.nb).
+Descriptions and interactive examples of the included functions are available in the attached [documentation notebook](Documentation/Documentation.nb). Examples to get started using the package are also available in the [examples folder](Documentation/Examples).
 
 ## Installation
 
