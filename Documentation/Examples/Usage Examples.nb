@@ -1,0 +1,522 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     20540,        514]
+NotebookOptionsPosition[     19076,        472]
+NotebookOutlinePosition[     20053,        507]
+CellTagsIndexPosition[     20010,        504]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ StyleBox[
+  RowBox[{"<<", "NCFPS`"}],
+  FontFamily->"Courier New"]], "Input",
+ CellChangeTimes->{{3.54739207222655*^9, 3.547392072729657*^9}, {
+  3.5499871408655896`*^9, 3.5499871623336277`*^9}, {3.797065630835765*^9, 
+  3.7970656341751523`*^9}, {3.797065684116026*^9, 3.7970656931554875`*^9}, {
+  3.7970658601361923`*^9, 3.7970658651653686`*^9}, {3.819104884083354*^9, 
+  3.8191048901485214`*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"a67873e4-b48c-4908-9e2d-d1e4b1918329"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SNC", "[", 
+   RowBox[{"x0", ",", "x1"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"X", "=", 
+   RowBox[{"{", 
+    RowBox[{"x0", ",", "x1"}], "}"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.543758957001489*^9, 3.543758964817103*^9}, {
+   3.5437592454771957`*^9, 3.543759245867197*^9}, {3.543768427521152*^9, 
+   3.543768450765193*^9}, {3.552103650578634*^9, 3.552103654017791*^9}, {
+   3.552103685082958*^9, 3.552103689801475*^9}, 3.5522554687943296`*^9, {
+   3.819105133032631*^9, 3.8191051649061484`*^9}},
+ CellLabel->"In[2]:=",ExpressionUUID->"b76842f4-389a-4e56-84b8-06efb3bd5c59"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"c", "=", 
+   RowBox[{"2", "x1"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"d", "=", 
+   RowBox[{"3", 
+    RowBox[{"x0", "**", "x1"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"ccircd", "=", 
+  RowBox[{"CompositionProduct", "[", 
+   RowBox[{"c", ",", 
+    RowBox[{"{", "d", "}"}], ",", "X"}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.8191049524538136`*^9, 3.8191050226130824`*^9}, {
+  3.819105175603199*^9, 3.8191051763826303`*^9}, {3.819105293782359*^9, 
+  3.819105296182686*^9}},
+ CellLabel->"In[4]:=",ExpressionUUID->"df3412ee-7325-4071-84be-be488e4bbf7d"],
+
+Cell[BoxData[
+ RowBox[{"6", " ", 
+  RowBox[{"x0", "**", "x0", "**", "x1"}]}]], "Output",
+ CellChangeTimes->{3.8230987942602882`*^9},
+ CellLabel->"Out[6]=",ExpressionUUID->"812d1d36-9dad-4de8-ab37-901b5133fafa"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "NCFPS`*"}]], "Input",
+ CellChangeTimes->{{3.822753037726329*^9, 3.822753082130626*^9}, {
+  3.8230987740554037`*^9, 3.823098778721323*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"32abfc40-953a-4239-a958-45a6de083c4f"],
+
+Cell[BoxData[
+ StyleBox[
+  FrameBox[GridBox[{
+     {
+      DynamicModuleBox[{Typeset`open$$ = True}, 
+       PaneSelectorBox[{False->
+        ButtonBox[
+         RowBox[{
+          
+          DynamicBox[FEPrivate`FrontEndResource[
+           "FEBitmaps", "RightPointerOpener"]], " ", 
+          StyleBox["NCFPS`", "InformationGridGroupHeader"]}],
+         Appearance->None,
+         BaseStyle->"InformationGridLink",
+         ButtonFunction:>FEPrivate`Set[Typeset`open$$, True],
+         Evaluator->Automatic,
+         Method->"Preemptive"], True->
+        PaneBox[GridBox[{
+           {
+            ButtonBox[
+             RowBox[{
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"],
+               ImageSizeCache->{20., {4., 16.}}], " ", 
+              StyleBox["NCFPS`", "InformationGridGroupHeader"]}],
+             Appearance->None,
+             BaseStyle->"InformationGridLink",
+             ButtonFunction:>FEPrivate`Set[Typeset`open$$, False],
+             Evaluator->Automatic,
+             Method->"Preemptive"]},
+           {
+            PaneBox[GridBox[{
+               {
+                ButtonBox[
+                 StyleBox["A", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "A", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["LeftShift", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "LeftShift", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["RelativeDegree", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "RelativeDegree", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["Antipode", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "Antipode", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["LocalGrowthConstants", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "LocalGrowthConstants", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["RhoRightAugment", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "RhoRightAugment", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["CharacteristicSeries", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "CharacteristicSeries", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["MapCoordinateFunctions", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "MapCoordinateFunctions", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["RightAugment", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "RightAugment", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["CompositionProduct", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "CompositionProduct", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 
+                 StyleBox["ModifiedCompositionProduct", 
+                  "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "ModifiedCompositionProduct", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["ShuffleInverse", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "ShuffleInverse", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["CompressWord", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "CompressWord", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["NCDegree", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "NCDegree", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["ShufflePower", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "ShufflePower", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["DeCompressWord", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "DeCompressWord", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["NCOrder", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "NCOrder", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["ShuffleProduct", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "ShuffleProduct", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["FirstLetter", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "FirstLetter", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["NCPrefix", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "NCPrefix", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["Support", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "Support", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["GlobalGrowthConstants", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "GlobalGrowthConstants", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["ProductPower", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "ProductPower", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["TruncateSeries", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "TruncateSeries", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["ImproperPart", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "ImproperPart", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["ProperPart", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "ProperPart", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["UltrametricDistance", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "UltrametricDistance", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["KleeneStar", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "KleeneStar", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["ProperQ", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "ProperQ", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["WordLength", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "WordLength", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["LanguageFilter", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "LanguageFilter", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["RealizationToSeries", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-382b619d-30c5-4ef3-a0ff-f3f8a10c3858", {
+                   "RealizationToSeries", "NCFPS`"}, False},
+                 ButtonNote->"NCFPS`",
+                 Evaluator->Automatic], ""}
+              },
+              DefaultBaseStyle->"Text",
+              
+              GridBoxAlignment->{
+               "Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+              GridBoxItemSize->{"Columns" -> {{
+                   Scaled[0.31666666666666665`]}}}],
+             ImageMargins->{{10, 0}, {0, 2}}]}
+          },
+          GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}}],
+         FrameMargins->{{0, 0}, {8, 0}}]}, Dynamic[Typeset`open$$],
+        ImageSize->Automatic]]}
+    },
+    GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+    GridBoxDividers->{"ColumnsIndexed" -> {{False}}, "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.5599999999999999]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.8]}, 
+        Offset[0.2]}}],
+   BaseStyle->"InformationTitleFrame"], "InformationGridPlain"]], "Output",
+ CellChangeTimes->{3.823098794344922*^9},
+ CellLabel->"Out[7]=",ExpressionUUID->"9d6970d5-acb1-423d-a92d-009f2e3df51f"]
+}, Open  ]]
+},
+CellGrouping->Manual,
+WindowSize->{1520, 765},
+WindowMargins->{{-6, Automatic}, {Automatic, 0}},
+PrintingCopies->1,
+PrintingPageRange->{2, 3},
+PrintingOptions->{"Magnification"->1.,
+"PaperOrientation"->"Portrait",
+"PaperSize"->{594., 787.0799999999999}},
+Magnification:>FEPrivate`If[
+  FEPrivate`Equal[FEPrivate`$VersionNumber, 6.], 2., 2. Inherited],
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 8, 2019)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[StyleDefinitions -> "Default.nb"]], 
+   Cell[
+    StyleData["DisplayFormula"]], 
+   Cell[
+    StyleData["Input"]], 
+   Cell[
+    StyleData["Code"]], 
+   Cell[
+    StyleData["Input"]]}, Visible -> False, FrontEndVersion -> 
+  "12.0 for Microsoft Windows (64-bit) (April 8, 2019)", StyleDefinitions -> 
+  "PrivateStylesheetFormatting.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 491, 9, 56, "Input",ExpressionUUID->"a67873e4-b48c-4908-9e2d-d1e4b1918329"],
+Cell[1051, 31, 639, 13, 97, "Input",ExpressionUUID->"b76842f4-389a-4e56-84b8-06efb3bd5c59"],
+Cell[CellGroupData[{
+Cell[1715, 48, 611, 15, 136, "Input",ExpressionUUID->"df3412ee-7325-4071-84be-be488e4bbf7d"],
+Cell[2329, 65, 210, 4, 65, "Output",ExpressionUUID->"812d1d36-9dad-4de8-ab37-901b5133fafa"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2576, 74, 245, 4, 57, "Input",ExpressionUUID->"32abfc40-953a-4239-a958-45a6de083c4f"],
+Cell[2824, 80, 16236, 389, 600, "Output",ExpressionUUID->"9d6970d5-acb1-423d-a92d-009f2e3df51f"]
+}, Open  ]]
+}
+]
+*)
+
