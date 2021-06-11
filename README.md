@@ -18,9 +18,9 @@ Manual setup is also possible a number of ways. The simplest is likely placing t
 
 For any problems/bugs/issues/concerns please open an issue in the *Issues* tab above.
 
-## Mathematical Resources
+## Additional Resources
 
-An in-depth primer on this package's mathematic topics is available at http://www.ece.odu.edu/~sgray/fps-book/.
+- An in-depth primer on this package's mathematic topics is available at http://www.ece.odu.edu/~sgray/fps-book/.
 
 ## Acknowledgments
 
