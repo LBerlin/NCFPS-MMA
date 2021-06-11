@@ -18,6 +18,10 @@ Manual setup is also possible a number of ways. The simplest is likely placing t
 
 For any problems/bugs/issues/concerns please open an issue in the *Issues* tab above.
 
+## Mathematical Resources
+
+An in-depth primer on this package's mathematic topics is available at http://www.ece.odu.edu/~sgray/fps-book/.
+
 ## Acknowledgments
 
 Development of this package was supported in part by the National Science Foundation under grants CMMI-1839378 and CMMI-1839387.
