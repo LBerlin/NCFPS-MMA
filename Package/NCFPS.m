@@ -17,6 +17,10 @@ Clear[CharacteristicSeries]
 CharacteristicSeries::usage="\
 CharacteristicSeries[{w_1, w_2, ...}] returns the series w_1 + w_2 + ... ."
 
+Clear[CompositionInverse]
+CompositionInverse::usage="\
+CompositionInverse[c, {x_0, x_1, ...}, deg] returns the compositional inverse of c over the alphabet {x_0, x_1, ...}. The result is a polynomial up to degree deg."
+
 Clear[CompositionProduct]
 CompositionProduct::usage="\
 CompositionProduct[c, {d_1, d_2, ...}, {x_0, x_1, ...}] calculates the composition product between series c and vector-valued series {d_1, d_2, ...} over the alphabet {x_0, x_1, ...}.
@@ -158,6 +162,21 @@ Antipode[a_A, x_List] := RhoRightAugment[A[a[[1]], 1], FirstPosition[x, a[[2]]][
 
 (* CharacteristicSeries *)
 CharacteristicSeries[x_List] := Apply[Plus, x]
+
+(*--------------------------------------------------------------*)
+
+(*CompositionInverse*)
+
+CompositionInverse[ser_, alph_, deg_] :=
+ Module[{lang = KleeneStar[alph, deg]},
+  Apply[Plus,
+   lang*Map[MapCoordinateFunctions[#, ser] &,
+     Map[Antipode[#, alph] &,
+      Map[A[1, #] &, lang]
+      ]
+     ]
+   ]
+  ]
 
 (*--------------------------------------------------------------*)
 
