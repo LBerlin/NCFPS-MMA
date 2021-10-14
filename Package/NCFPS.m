@@ -166,8 +166,12 @@ CharacteristicSeries[x_List] := Apply[Plus, x]
 (*--------------------------------------------------------------*)
 
 (*CompositionInverse*)
+Clear[CompositionInverseAux]
 
 CompositionInverse[ser_, alph_, deg_] :=
+  CompositionInverseAux[NCExpand@ser, alph, deg]
+
+CompositionInverseAux[ser_, alph_, deg_] :=
  Module[{lang = KleeneStar[alph, deg]},
   Apply[Plus,
    lang*Map[MapCoordinateFunctions[#, ser] &,
@@ -499,8 +503,8 @@ RelativeDegree[poly_, x_List, a_Symbol] := Module[{supp = Support[poly], suppF, 
 (*There is no need to include a Liebniz rule in this function since it will be resolved when RightAugment is called.*)
 RhoRightAugment[a_Plus, i_, x_List] := Map[RhoRightAugment[#, i, x]&, a]
 RhoRightAugment[a_, 0, x_List] := 
-  RightAugment[a, 0, x] =
-    -RightAugment[a, 0, x] + Sum[A[ic, 1] * RightAugment[a, ic, x], {ic, 1, Length[x] - 1}]
+	RhoRightAugment[a, 0, x] = 
+		-RightAugment[a, 0, x] + Sum[A[ic, 1] * RightAugment[a, ic, x], {ic, 1, Length[x] - 1}]
 RhoRightAugment[a_, i_, x_List] := -RightAugment[a, i, x]
   
 (*--------------------------------------------------------------*)
@@ -511,8 +515,8 @@ RhoRightAugment[a_, i_, x_List] := -RightAugment[a, i, x]
 		- Take only drift letter instead of assuming alphabet is sorted. This is closer in-line to functions that assume variables.*)
 RightAugment[a_Plus, i_, x_List] := Map[RightAugment[#, i, x]&, a]
 RightAugment[a_Times, i_, x_List] := 
-  RightAugment[a, i, x] =
-    Sum[MapAt[RightAugment[#, i, x]&, a, ic], {ic, Length[a]}]
+	RightAugment[a, i, x] =
+		Sum[MapAt[RightAugment[#, i, x]&, a, ic], {ic, Length[a]}]
 RightAugment[a_A^exp_, i_, x_List] := exp * a^(exp - 1) * RightAugment[a, i, x]
 RightAugment[a_A, i_, x_List] := A[a[[1]], a[[2]] ** x[[i + 1]]]
 RightAugment[a_, i_, x_List] := 0
