@@ -1,0 +1,141 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      5480,        133]
+NotebookOptionsPosition[      4844,        116]
+NotebookOutlinePosition[      5248,        132]
+CellTagsIndexPosition[      5205,        129]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"CreatePacletArchive", "::", "versionExists"}], "=", 
+   "\"\<Paclet version `1` already exists.\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.8454287789678645`*^9, 3.845428792774091*^9}, 
+   3.845509545125413*^9, {3.846201825376499*^9, 3.846201828881158*^9}},
+ CellLabel->"In[3]:=",ExpressionUUID->"989dc512-999d-4683-8daa-fa236727667c"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"existingPaclets", "=", 
+   RowBox[{"FileNames", "[", "\"\<..\\\\Paclets\\\\*.paclet\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"versions", "=", 
+   RowBox[{"Last", "/@", 
+    RowBox[{"StringSplit", "[", 
+     RowBox[{
+      RowBox[{"FileBaseName", "/@", "existingPaclets"}], ",", "\"\<-\>\""}], 
+     "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"paclet", "=", 
+   RowBox[{"Import", "[", "\"\<..\\\\NCFPS\\\\PacletInfo.m\>\"", "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.8461920724118547`*^9, 3.8461920787202177`*^9}, {
+   3.846202121876279*^9, 3.8462021348999496`*^9}, {3.846203474712484*^9, 
+   3.846203490133212*^9}, 3.846203544581311*^9},
+ CellLabel->"In[5]:=",ExpressionUUID->"375af3a7-c11d-4799-a201-15df1f519c93"],
+
+Cell[BoxData[
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"FreeQ", "[", 
+    RowBox[{"versions", ",", 
+     RowBox[{"version", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Apply", "[", "Association", "]"}], "[", "paclet", "]"}], "[",
+        "Version", "]"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"CreatePacletArchive", "[", 
+    RowBox[{"\"\<..\\\\NCFPS\>\"", ",", 
+     RowBox[{"NotebookDirectory", "[", "]"}]}], "]"}], ",", 
+   RowBox[{"Message", "[", 
+    RowBox[{
+     RowBox[{"CreatePacletArchive", "::", "versionExists"}], ",", "version"}],
+     "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.8461922100421257`*^9, {3.846192587215191*^9, 3.8461925906656675`*^9}, 
+   3.846192620914015*^9, {3.8461927511046667`*^9, 3.846192779167716*^9}, {
+   3.84619282365662*^9, 3.8461928369704523`*^9}, {3.8461928758158092`*^9, 
+   3.8461928857854323`*^9}, 3.846192967484406*^9, {3.8461930380857897`*^9, 
+   3.846193040731166*^9}, {3.846193451309961*^9, 3.846193454867505*^9}, {
+   3.846193589282614*^9, 3.8461936235344353`*^9}, {3.8461937213004885`*^9, 
+   3.846193721413601*^9}, {3.8461937623701515`*^9, 3.846193765822379*^9}, {
+   3.8461938776075425`*^9, 3.8461938806649427`*^9}, {3.8461939139328327`*^9, 
+   3.846193922646536*^9}, {3.846194007588422*^9, 3.846194009607939*^9}, {
+   3.8461969154701395`*^9, 3.8461969175511103`*^9}, {3.8461969627246504`*^9, 
+   3.8461969953688526`*^9}, {3.8461972838404713`*^9, 
+   3.8461973085307093`*^9}, {3.846197347629533*^9, 3.8461973609008627`*^9}, {
+   3.846197468273428*^9, 3.846197494016959*^9}, {3.8462013359146333`*^9, 
+   3.8462013688579254`*^9}, {3.846201864716296*^9, 3.8462018852522354`*^9}, {
+   3.846202047117196*^9, 3.846202051497535*^9}, {3.846203485597045*^9, 
+   3.846203487875249*^9}},
+ CellLabel->"In[8]:=",ExpressionUUID->"b42f8b8d-205d-43d8-89e1-51dc305f95cd"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"siteInfo", "=", 
+   RowBox[{"PacletSite", "[", 
+    RowBox[{"Append", "[", 
+     RowBox[{"paclet", ",", 
+      RowBox[{
+      "Location", "\[Rule]", 
+       "\"\<https://raw.githubusercontent.com/LBerlin/NCFPS-MMA/paclet-\
+conversion\>\""}]}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{"\"\<..\\\\PacletSite.m\>\"", ",", "siteInfo"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"CreateArchive", "[", 
+   RowBox[{
+   "\"\<..\\\\PacletSite.m\>\"", ",", "\"\<..\\\\PacletSite.mz\>\"", ",", 
+    RowBox[{"OverwriteTarget", "\[Rule]", "True"}]}], "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.8462035518095956`*^9, 3.846203552666831*^9}, {
+  3.846204033663127*^9, 3.846204102116106*^9}, {3.846204727822934*^9, 
+  3.8462047450466757`*^9}, {3.8462049693763685`*^9, 3.8462049982456446`*^9}, {
+  3.84620522126854*^9, 3.846205221524541*^9}, {3.8462052636610703`*^9, 
+  3.846205307556057*^9}, {3.846205527237624*^9, 3.846205532747841*^9}},
+ CellLabel->"In[17]:=",ExpressionUUID->"97f309bd-f4df-4202-a54a-84e7b1ffb69e"]
+},
+WindowSize->{958.5, 486.},
+WindowMargins->{{Automatic, 954.75}, {Automatic, 0}},
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"f80687e2-0efd-4a9e-b67b-8eb346c24793"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 514, 11, 47, "Input",ExpressionUUID->"989dc512-999d-4683-8daa-fa236727667c"],
+Cell[1075, 33, 807, 19, 66, "Input",ExpressionUUID->"375af3a7-c11d-4799-a201-15df1f519c93"],
+Cell[1885, 54, 1838, 34, 47, "Input",ExpressionUUID->"b42f8b8d-205d-43d8-89e1-51dc305f95cd"],
+Cell[3726, 90, 1114, 24, 66, "Input",ExpressionUUID->"97f309bd-f4df-4202-a54a-84e7b1ffb69e"]
+}
+]
+*)
+
