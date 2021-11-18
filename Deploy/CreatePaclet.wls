@@ -14,11 +14,12 @@ SetDirectory @ scriptDir;
 
 existingPaclets = FileNames["..\\Paclets\\*.paclet"];
 versions = Last /@ StringSplit[FileBaseName /@ existingPaclets, "-"];
+paclet = Import["..\\NCFPS\\PacletInfo.m"];
 
 If[
  FreeQ[versions, 
   version = 
-   Apply[Association][Import["..\\NCFPS\\PacletInfo.m"]][Version]],
+   Apply[Association][paclet][Version]],
  CreatePacletArchive["..\\NCFPS", NotebookDirectory[]], 
  Message[CreatePacletArchive::versionExists, version]
 ]
@@ -35,8 +36,7 @@ siteInfo =
   PacletSite[
    Append[paclet, 
     Location -> 
-     "https://raw.githubusercontent.com/LBerlin/NCFPS-MMA/paclet-\
-conversion"]];
+     "https://raw.githubusercontent.com/LBerlin/NCFPS-MMA/paclet-conversion"]];
 Export["..\\PacletSite.m", siteInfo];
 CreateArchive["..\\PacletSite.m", "..\\PacletSite.mz", OverwriteTarget -> True];
     
