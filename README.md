@@ -64,6 +64,12 @@ If a newer version is available, Mathematica will grab it.
 PacletInstall["NCFPS"]
 ```
 
+It is recommended at this point to uninstall any older versions of the package.
+
+```wolfram
+PacletUninstall[Drop[PacletFind["NCFPS"], 1]]
+```
+
 ### From File
 
 You can check the current installed version of the package with `PacletFind`.
@@ -72,16 +78,16 @@ You can check the current installed version of the package with `PacletFind`.
 PacletFind["NCFPS"]
 ```
 
-If the [latest release](https://github.com/LBerlin/NCFPS-MMA/releases/latest) is more recent than the installed version, you'll want to first uninstall the current version.
-
-```wolfram
-PacletUninstall["NCFPS"]
-```
-
-Then you can install the more recently downloaded paclet file.
+If the [latest release](https://github.com/LBerlin/NCFPS-MMA/releases/latest) is more recent than the installed version, then download and install the newer paclet file.
 
 ```wolfram
 PacletInstall["C:\\Users\\Alice\\Downloads\\NCFPS-0.1.0.paclet"]
+```
+
+It is recommended at this point to uninstall any older versions of the package.
+
+```wolfram
+PacletUninstall[Drop[PacletFind["NCFPS"], 1]]
 ```
 
 ## Issues
