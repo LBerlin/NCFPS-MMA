@@ -20,7 +20,7 @@ If[
  FreeQ[versions, 
   version = 
    Apply[Association][paclet][Version]],
- CreatePacletArchive["..\\NCFPS", NotebookDirectory[]], 
+ CreatePacletArchive["..\\NCFPS", FileNameJoin[{DirectoryName @ scriptDir, "Paclets"}]], 
  Message[CreatePacletArchive::versionExists, version]
 ]
 
@@ -31,6 +31,8 @@ toMove = Pick[existingPaclets,
 If[FailureQ@CopyFile[#, FileNameJoin[{"Archive", #}]], $Failed, 
     DeleteFile[#]] & /@ toMove; 
 *)
+
+(* TODO: Check that new paclet exists before updating the PacletSite.m *)
 
 siteInfo = 
   PacletSite[

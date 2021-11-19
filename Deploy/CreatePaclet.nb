@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      5480,        133]
-NotebookOptionsPosition[      4844,        116]
-NotebookOutlinePosition[      5248,        132]
-CellTagsIndexPosition[      5205,        129]
+NotebookDataLength[      5754,        140]
+NotebookOptionsPosition[      5085,        122]
+NotebookOutlinePosition[      5522,        139]
+CellTagsIndexPosition[      5479,        136]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -64,7 +64,12 @@ Cell[BoxData[
         "Version", "]"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
    RowBox[{"CreatePacletArchive", "[", 
     RowBox[{"\"\<..\\\\NCFPS\>\"", ",", 
-     RowBox[{"NotebookDirectory", "[", "]"}]}], "]"}], ",", 
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"DirectoryName", "@", 
+         RowBox[{"NotebookDirectory", "[", "]"}]}], ",", "\"\<Paclets\>\""}], 
+       "}"}], "]"}]}], "]"}], ",", 
    RowBox[{"Message", "[", 
     RowBox[{
      RowBox[{"CreatePacletArchive", "::", "versionExists"}], ",", "version"}],
@@ -85,8 +90,9 @@ Cell[BoxData[
    3.846197468273428*^9, 3.846197494016959*^9}, {3.8462013359146333`*^9, 
    3.8462013688579254`*^9}, {3.846201864716296*^9, 3.8462018852522354`*^9}, {
    3.846202047117196*^9, 3.846202051497535*^9}, {3.846203485597045*^9, 
-   3.846203487875249*^9}},
- CellLabel->"In[8]:=",ExpressionUUID->"b42f8b8d-205d-43d8-89e1-51dc305f95cd"],
+   3.846203487875249*^9}, {3.846292543693973*^9, 3.8462925476480827`*^9}, 
+   3.8462933138469334`*^9},
+ CellLabel->"In[23]:=",ExpressionUUID->"b42f8b8d-205d-43d8-89e1-51dc305f95cd"],
 
 Cell[BoxData[{
  RowBox[{
@@ -115,7 +121,8 @@ conversion\>\""}]}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]",
  CellLabel->"In[17]:=",ExpressionUUID->"97f309bd-f4df-4202-a54a-84e7b1ffb69e"]
 },
 WindowSize->{958.5, 486.},
-WindowMargins->{{Automatic, 954.75}, {Automatic, 0}},
+WindowMargins->{{Automatic, -4.199999999999818}, {
+  127.80000000000007`, Automatic}},
 FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (June 19, 2020)",
 StyleDefinitions->"Default.nb",
 ExpressionUUID->"f80687e2-0efd-4a9e-b67b-8eb346c24793"
@@ -133,8 +140,8 @@ CellTagsIndex->{}
 Notebook[{
 Cell[558, 20, 514, 11, 47, "Input",ExpressionUUID->"989dc512-999d-4683-8daa-fa236727667c"],
 Cell[1075, 33, 807, 19, 66, "Input",ExpressionUUID->"375af3a7-c11d-4799-a201-15df1f519c93"],
-Cell[1885, 54, 1838, 34, 47, "Input",ExpressionUUID->"b42f8b8d-205d-43d8-89e1-51dc305f95cd"],
-Cell[3726, 90, 1114, 24, 66, "Input",ExpressionUUID->"97f309bd-f4df-4202-a54a-84e7b1ffb69e"]
+Cell[1885, 54, 2079, 40, 66, "Input",ExpressionUUID->"b42f8b8d-205d-43d8-89e1-51dc305f95cd"],
+Cell[3967, 96, 1114, 24, 66, "Input",ExpressionUUID->"97f309bd-f4df-4202-a54a-84e7b1ffb69e"]
 }
 ]
 *)
