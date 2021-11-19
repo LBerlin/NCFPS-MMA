@@ -50,9 +50,9 @@ Now it should be possible to load in NCFPS, even after restarting Mathematica.
 
 ## Updating
 
-### From the Repostory
+### From the Repository
 
-If the the repository has been added to your Mathematica as a paclet site as described in the Installation section, then it is possible to update to newer version directly from a notebook. First, check for updates to the paclet site.
+If the the repository has been added to your Mathematica as a paclet site as described in the [Installation section](#from-the-repository-1), then it is possible to update to newer version directly from a notebook. First, check for updates to the paclet site.
 
 ```wolfram
 PacletSiteUpdate[PacletSites[]]
