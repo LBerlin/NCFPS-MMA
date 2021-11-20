@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      5754,        140]
-NotebookOptionsPosition[      5085,        122]
-NotebookOutlinePosition[      5522,        139]
-CellTagsIndexPosition[      5479,        136]
+NotebookDataLength[      6007,        146]
+NotebookOptionsPosition[      5430,        129]
+NotebookOutlinePosition[      5867,        146]
+CellTagsIndexPosition[      5824,        143]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -25,11 +25,16 @@ Cell[BoxData[{
    "\"\<Paclet version `1` already exists.\>\""}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
+  RowBox[{
+   RowBox[{"PacletSite", "::", "versionMissing"}], "=", 
+   "\"\<Paclet version does not exist\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
   RowBox[{"SetDirectory", "[", 
    RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}]}], "Input",
  CellChangeTimes->{{3.8454287789678645`*^9, 3.845428792774091*^9}, 
-   3.845509545125413*^9, {3.846201825376499*^9, 3.846201828881158*^9}},
- CellLabel->"In[3]:=",ExpressionUUID->"989dc512-999d-4683-8daa-fa236727667c"],
+   3.845509545125413*^9, {3.846201825376499*^9, 3.846201828881158*^9}, {
+   3.8463617598584814`*^9, 3.8463618008337855`*^9}, 3.846362161468754*^9},
+ CellLabel->"In[20]:=",ExpressionUUID->"989dc512-999d-4683-8daa-fa236727667c"],
 
 Cell[BoxData[{
  RowBox[{
@@ -46,11 +51,21 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{"paclet", "=", 
    RowBox[{"Import", "[", "\"\<..\\\\NCFPS\\\\PacletInfo.m\>\"", "]"}]}], 
-  ";"}]}], "Input",
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"siteInfo", "=", 
+   RowBox[{"PacletSite", "[", 
+    RowBox[{"Append", "[", 
+     RowBox[{"paclet", ",", 
+      RowBox[{
+      "Location", "\[Rule]", 
+       "\"\<https://raw.githubusercontent.com/LBerlin/NCFPS-MMA/master\>\""}]}\
+], "]"}], "]"}]}], ";"}]}], "Input",
  CellChangeTimes->{{3.8461920724118547`*^9, 3.8461920787202177`*^9}, {
    3.846202121876279*^9, 3.8462021348999496`*^9}, {3.846203474712484*^9, 
-   3.846203490133212*^9}, 3.846203544581311*^9},
- CellLabel->"In[5]:=",ExpressionUUID->"375af3a7-c11d-4799-a201-15df1f519c93"],
+   3.846203490133212*^9}, 3.846203544581311*^9, {3.846358894150955*^9, 
+   3.846358894410302*^9}},
+ CellLabel->"In[15]:=",ExpressionUUID->"375af3a7-c11d-4799-a201-15df1f519c93"],
 
 Cell[BoxData[
  RowBox[{"If", "[", 
@@ -62,14 +77,29 @@ Cell[BoxData[
        RowBox[{
         RowBox[{"Apply", "[", "Association", "]"}], "[", "paclet", "]"}], "[",
         "Version", "]"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
-   RowBox[{"CreatePacletArchive", "[", 
-    RowBox[{"\"\<..\\\\NCFPS\>\"", ",", 
-     RowBox[{"FileNameJoin", "[", 
-      RowBox[{"{", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"FailureQ", "[", 
+       RowBox[{"CreatePacletArchive", "[", 
+        RowBox[{"\"\<..\\\\NCFPS\>\"", ",", 
+         RowBox[{"FileNameJoin", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"DirectoryName", "@", 
+             RowBox[{"NotebookDirectory", "[", "]"}]}], ",", 
+            "\"\<Paclets\>\""}], "}"}], "]"}]}], "]"}], "]"}]}], ",", 
+     RowBox[{
+      RowBox[{"Export", "[", 
+       RowBox[{"\"\<..\\\\PacletSite.m\>\"", ",", "siteInfo"}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"CreateArchive", "[", 
        RowBox[{
-        RowBox[{"DirectoryName", "@", 
-         RowBox[{"NotebookDirectory", "[", "]"}]}], ",", "\"\<Paclets\>\""}], 
-       "}"}], "]"}]}], "]"}], ",", 
+       "\"\<..\\\\PacletSite.m\>\"", ",", "\"\<..\\\\PacletSite.mz\>\"", ",", 
+        RowBox[{"OverwriteTarget", "\[Rule]", "True"}]}], "]"}], ";"}], ",", 
+     RowBox[{"Message", "[", 
+      RowBox[{"PacletSite", "::", "versionMissing"}], "]"}]}], 
+    "\[IndentingNewLine]", "]"}], ",", 
    RowBox[{"Message", "[", 
     RowBox[{
      RowBox[{"CreatePacletArchive", "::", "versionExists"}], ",", "version"}],
@@ -91,34 +121,11 @@ Cell[BoxData[
    3.8462013688579254`*^9}, {3.846201864716296*^9, 3.8462018852522354`*^9}, {
    3.846202047117196*^9, 3.846202051497535*^9}, {3.846203485597045*^9, 
    3.846203487875249*^9}, {3.846292543693973*^9, 3.8462925476480827`*^9}, 
-   3.8462933138469334`*^9},
- CellLabel->"In[23]:=",ExpressionUUID->"b42f8b8d-205d-43d8-89e1-51dc305f95cd"],
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"siteInfo", "=", 
-   RowBox[{"PacletSite", "[", 
-    RowBox[{"Append", "[", 
-     RowBox[{"paclet", ",", 
-      RowBox[{
-      "Location", "\[Rule]", 
-       "\"\<https://raw.githubusercontent.com/LBerlin/NCFPS-MMA/paclet-\
-conversion\>\""}]}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"Export", "[", 
-   RowBox[{"\"\<..\\\\PacletSite.m\>\"", ",", "siteInfo"}], "]"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"CreateArchive", "[", 
-   RowBox[{
-   "\"\<..\\\\PacletSite.m\>\"", ",", "\"\<..\\\\PacletSite.mz\>\"", ",", 
-    RowBox[{"OverwriteTarget", "\[Rule]", "True"}]}], "]"}], ";"}]}], "Input",
- CellChangeTimes->{{3.8462035518095956`*^9, 3.846203552666831*^9}, {
-  3.846204033663127*^9, 3.846204102116106*^9}, {3.846204727822934*^9, 
-  3.8462047450466757`*^9}, {3.8462049693763685`*^9, 3.8462049982456446`*^9}, {
-  3.84620522126854*^9, 3.846205221524541*^9}, {3.8462052636610703`*^9, 
-  3.846205307556057*^9}, {3.846205527237624*^9, 3.846205532747841*^9}},
- CellLabel->"In[17]:=",ExpressionUUID->"97f309bd-f4df-4202-a54a-84e7b1ffb69e"]
+   3.8462933138469334`*^9, {3.8463589025808463`*^9, 3.846358903374408*^9}, {
+   3.8463600244606276`*^9, 3.8463600590318613`*^9}, {3.846360139821643*^9, 
+   3.846360156921526*^9}, {3.8463614798365316`*^9, 3.846361493213406*^9}, {
+   3.8463620996841536`*^9, 3.8463621263186936`*^9}},
+ CellLabel->"In[24]:=",ExpressionUUID->"b42f8b8d-205d-43d8-89e1-51dc305f95cd"]
 },
 WindowSize->{958.5, 486.},
 WindowMargins->{{Automatic, -4.199999999999818}, {
@@ -138,10 +145,9 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 514, 11, 47, "Input",ExpressionUUID->"989dc512-999d-4683-8daa-fa236727667c"],
-Cell[1075, 33, 807, 19, 66, "Input",ExpressionUUID->"375af3a7-c11d-4799-a201-15df1f519c93"],
-Cell[1885, 54, 2079, 40, 66, "Input",ExpressionUUID->"b42f8b8d-205d-43d8-89e1-51dc305f95cd"],
-Cell[3967, 96, 1114, 24, 66, "Input",ExpressionUUID->"97f309bd-f4df-4202-a54a-84e7b1ffb69e"]
+Cell[558, 20, 746, 16, 68, "Input",ExpressionUUID->"989dc512-999d-4683-8daa-fa236727667c"],
+Cell[1307, 38, 1159, 29, 88, "Input",ExpressionUUID->"375af3a7-c11d-4799-a201-15df1f519c93"],
+Cell[2469, 69, 2957, 58, 163, "Input",ExpressionUUID->"b42f8b8d-205d-43d8-89e1-51dc305f95cd"]
 }
 ]
 *)

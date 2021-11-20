@@ -8,6 +8,8 @@
 
 CreatePacletArchive::versionExists = 
 	"Paclet version `1` already exists."
+PacletSite::versionMissing = 
+	"Paclet version does not exist";
 
 scriptDir = DirectoryName @ $InputFileName;
 SetDirectory @ scriptDir;
@@ -15,12 +17,22 @@ SetDirectory @ scriptDir;
 existingPaclets = FileNames["..\\Paclets\\*.paclet"];
 versions = Last /@ StringSplit[FileBaseName /@ existingPaclets, "-"];
 paclet = Import["..\\NCFPS\\PacletInfo.m"];
-
+siteInfo = 
+  PacletSite[
+   Append[paclet, 
+    Location -> 
+     "https://raw.githubusercontent.com/LBerlin/NCFPS-MMA/master"]];
+     
 If[
  FreeQ[versions, 
   version = 
    Apply[Association][paclet][Version]],
- CreatePacletArchive["..\\NCFPS", FileNameJoin[{DirectoryName @ scriptDir, "Paclets"}]], 
+ 	If[
+ 	 !FailureQ[CreatePacletArchive["..\\NCFPS", 
+ 	 FileNameJoin[{DirectoryName @ scriptDir, "Paclets"}]]],
+	Export["..\\PacletSite.m", siteInfo];
+	CreateArchive["..\\PacletSite.m", "..\\PacletSite.mz", OverwriteTarget -> True];,
+	Message[PacletSite::versionMissing]],
  Message[CreatePacletArchive::versionExists, version]
 ]
 
@@ -32,13 +44,4 @@ If[FailureQ@CopyFile[#, FileNameJoin[{"Archive", #}]], $Failed,
     DeleteFile[#]] & /@ toMove; 
 *)
 
-(* TODO: Check that new paclet exists before updating the PacletSite.m *)
-
-siteInfo = 
-  PacletSite[
-   Append[paclet, 
-    Location -> 
-     "https://raw.githubusercontent.com/LBerlin/NCFPS-MMA/paclet-conversion"]];
-Export["..\\PacletSite.m", siteInfo];
-CreateArchive["..\\PacletSite.m", "..\\PacletSite.mz", OverwriteTarget -> True];
-    
+(* TODO: PacletSite location string automatically reflect the checked out branch *)
