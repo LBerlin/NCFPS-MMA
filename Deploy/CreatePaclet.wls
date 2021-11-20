@@ -21,7 +21,7 @@ siteInfo =
   PacletSite[
    Append[paclet, 
     Location -> 
-     "https://raw.githubusercontent.com/LBerlin/NCFPS-MMA/master"]];
+     "https://raw.githubusercontent.com/LBerlin/NCFPS-MMA/main"]];
      
 If[
  FreeQ[versions, 
