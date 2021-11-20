@@ -18,6 +18,7 @@ First, register the repository as a paclet site in Mathematica.
 
 ```wolfram
 PacletSiteRegister["https://raw.githubusercontent.com/LBerlin/NCFPS-MMA/main"]
+PacletSiteUpdate[PacletSites[]]
 ```
 
 Then Mathematica should be able to find the latest version of the package available on this repository and install it.
