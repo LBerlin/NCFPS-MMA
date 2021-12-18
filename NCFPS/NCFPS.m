@@ -238,9 +238,9 @@ FirstLetter[a_] := FirstLetterAux[ExpandNonCommutativeMultiply[a]]
 (*--------------------------------------------------------------*)
 
 (* GlobalGrowthConstant *)
-Clear[GlobalGrowthConstantAux]
+Clear[GlobalGrowthConstantsAux]
 
-GlobalGrowthConstants[c_] := GlobalGrowthConstantAux[c]
+(*GlobalGrowthConstants[c_] := GlobalGrowthConstantAux[c]
 GlobalGrowthConstants[c_, x_List] := (mod = LinearModelFit[GlobalGrowthConstantAux[c, x], x, x];
 	Print[mod["ParameterTable"]];
 	E^mod["BestFitParameters"])
@@ -261,7 +261,46 @@ GlobalGrowthConstants[c_, x_List] := (mod = LinearModelFit[GlobalGrowthConstantA
   GlobalGrowthConstantAux[w_?CommutativeQ, x_List] := Flatten[{Table[0, {n, 1, Length[x]}],
   	Abs[Log[Abs[w]]]}]
   GlobalGrowthConstantAux[(c_:1) * w_, x_List] := Flatten[{Table[WordLength[w, x[[n]]], {n,1,Length[x]}],
-  	Abs[Log[Abs[c]]]}]
+  	Abs[Log[Abs[c]]]}]*)
+  	
+GlobalGrowthConstants[c_] := GlobalGrowthConstantsAux[ExpandNonCommutativeMultiply@c]
+GlobalGrowthConstants[c_, x_List] := 
+Module[
+  {mod = LinearModelFit[GlobalGrowthConstantsAux[ExpandNonCommutativeMultiply@c, x], x, x]},
+  Print[mod["ParameterTable"]];
+  E^mod["BestFitParameters"]
+]
+
+GlobalGrowthConstantsAux[a_Plus] := GlobalGrowthConstantsAux[Map[GlobalGrowthConstantsAux, Apply[List, a]]]
+GlobalGrowthConstantsAux[b_List] :=
+ Module[
+  {grp = Split[b, #1[[1]] == #2[[1]] &], a, nrm, nrml, x},
+  a = Table[
+    {grp[[j, 1, 1]], Max@Table[grp[[j, i, 2]], {i, Length@grp[[j]]}]},
+    {j, Length@grp}
+    ];
+  nrm = Normal[LinearModelFit[a, x, x]];
+  nrml = nrm + 
+    Max@Table[a[[i, 2]] - (nrm /. x -> (a[[i, 1]])), {i, 1, Length@a}];
+  Print[
+   Show[
+    ListPlot[a, PlotStyle -> Red, 
+     AxesLabel -> {"|\[Eta]|", "ln[|(c,\[Eta])|]"}],
+    Plot[nrml, {x, a[[1, 1]], a[[-1, 1]]}]
+    ]
+   ];
+  {E^(nrml /. x -> 0), E^Coefficient[nrml, x]}
+ ]
+GlobalGrowthConstantsAux[c_?CommutativeQ] := {0, Log@Abs@c}
+GlobalGrowthConstantsAux[(c_ : 1)*w_] := {WordLength[w], Log@Abs@c}
+
+(*Fine growth case*)
+GlobalGrowthConstantsAux[s_Plus, x_List] := Map[GlobalGrowthConstantsAux[#, x] &, Apply[List, s]]
+GlobalGrowthConstantsAux[w_?CommutativeQ, x_List] := 
+ Flatten[{ConstantArray[0, Length@x], Abs@Log@Abs@w}]
+GlobalGrowthConstantsAux[(c_ : 1)*w_, x_List] := 
+ Flatten[{Table[WordLength[w, x[[n]]], {n, 1, Length@x}], 
+   Abs@Log@Abs@c}]
  
 (*--------------------------------------------------------------*)
 
@@ -321,29 +360,44 @@ LeftShift[polynomial_, monomial_, n_Integer?NonNegative] :=
 (*--------------------------------------------------------------*)
 
 (* LocalGrowthConstant *)
-Clear[LocalGrowthConstantAux]
+Clear[LocalGrowthConstantsAux]
 
-LocalGrowthConstants[c_] := LocalGrowthConstantAux[c]
-LocalGrowthConstants[c_, x_List] := (mod = LinearModelFit[LocalGrowthConstantsAux[c, x], x, x];
+LocalGrowthConstants[c_] := LocalGrowthConstantsAux[ExpandNonCommutativeMultiply@c]
+LocalGrowthConstants[c_, x_List] := 
+  Module[
+  	{mod = LinearModelFit[LocalGrowthConstantsAux[ExpandNonCommutativeMultiply@c, x], x, x]},
 	Print[mod["ParameterTable"]];
-	E^mod["BestFitParameters"])
+	E^mod["BestFitParameters"]
+  ]
 
-  LocalGrowthConstantAux[a_Plus] := LocalGrowthConstantAux[Map[LocalGrowthConstantAux, Apply[List, a]]]
-  LocalGrowthConstantAux[b_List] := (grp = Split[b, #1[[1]] == #2[[1]] &];
-    a = Table[{grp[[j]][[1]][[1]], Max[Table[grp[[j]][[i]][[2]], {i,Length[grp[[j]]]}]]}, {j,Length[grp]}];
-    nrm = Normal[LinearModelFit[a, x, x]];
-	nrml = nrm + Max[Table[a[[i]][[2]] - (nrm /. x -> (a[[i]][[1]])), {i, 1, Length[a]}]]; 
-	Print[Show[ListPlot[a, PlotStyle -> Red, AxesLabel -> {"|\[Eta]|", "ln[|(c,\[Eta])|/|\[Eta]|!]"}], 
-		Plot[nrml, {x, 0, Length[a]}]]];
-    {E^(nrml /. x -> 0), E^Coefficient[nrml, x]})
-  LocalGrowthConstantAux[c_?CommutativeQ] := List[0, Log[Abs[c]]]
-  LocalGrowthConstantAux[(c_:1) * w_] := List[WordLength[w], Log[Abs[c] / (WordLength[w]!)]]
+  LocalGrowthConstantsAux[a_Plus] := LocalGrowthConstantsAux[Map[LocalGrowthConstantsAux, Apply[List, a]]]
+  LocalGrowthConstantsAux[b_List] := 
+    Module[
+      {grp = Split[b, #1[[1]] == #2[[1]] &], a, nrm, nrml, x},
+      a = Table[
+      	{grp[[j, 1, 1]], Max@Table[grp[[j, i, 2]], {i, Length@grp[[j]]}]}, 
+      	{j, Length@grp}
+      ];
+      nrm = Normal[LinearModelFit[a, x, x]];
+	  nrml = nrm 
+	    + Max@Table[a[[i, 2]] - (nrm /. x -> (a[[i, 1]])), {i, 1, Length@a}]; 
+	  Print[
+	  	Show[
+	  	  ListPlot[a, PlotStyle -> Red, 
+	  	  	AxesLabel -> {"|\[Eta]|", "ln[|(c,\[Eta])|/|\[Eta]|!]"}], 
+		  Plot[nrml, {x, a[[1, 1]], a[[-1, 1]]}]
+		]
+	  ];
+      {E^(nrml /. x -> 0), E^Coefficient[nrml, x]}
+    ]
+  LocalGrowthConstantsAux[c_?CommutativeQ] := List[0, Log@Abs@c]
+  LocalGrowthConstantsAux[(c_:1) * w_] := List[WordLength[w], Log[Abs@c / (WordLength[w]!)]]
 
   (* Fine Growth Case *)
   LocalGrowthConstantsAux[s_Plus, x_List] := Map[LocalGrowthConstantsAux[#, x]&, Apply[List, s]]
-  LocalGrowthConstantsAux[w_?CommutativeQ, x_List] := Flatten[{Table[0, {n, 1, Length[x]}], Abs[Log[Abs[w]]]}]
-  LocalGrowthConstantsAux[(c_:1) * w_, x_List] := Flatten[{Table[WordLength[w, x[[n]]], {n, 1, Length[x]}],
-  	Abs[Log[Abs[c]] / Apply[Times, Table[WordLength[w, x[[n]]]!, {n, Length[x]}]]]}]
+  LocalGrowthConstantsAux[w_?CommutativeQ, x_List] := Flatten[{ConstantArray[0, Length@x], Abs@Log@Abs@w}]
+  LocalGrowthConstantsAux[(c_:1) * w_, x_List] := Flatten[{Table[WordLength[w, x[[n]]], {n, 1, Length@x}],
+  	Abs[Log@Abs@c / Apply[Times, Table[WordLength[w, x[[n]]]!, {n, Length@x}]]]}]
 
 (*--------------------------------------------------------------*)
 

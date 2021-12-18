@@ -1,10 +1,10 @@
 (* Paclet Info File *)
 
-(* created 2021/11/19*)
+(* created 2021/12/18*)
 
 Paclet[
     Name -> "NCFPS",
-    Version -> "0.1.2",
+    Version -> "0.1.3",
     MathematicaVersion -> "6+",
     Extensions -> 
         {
