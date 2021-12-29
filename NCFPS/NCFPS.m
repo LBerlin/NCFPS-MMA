@@ -34,6 +34,7 @@ Clear[DeCompressWord]
 DeCompressWord::usage="\
 DeCompressWord[c] returns c in a form where words containing exponents are expanded fully."
 
+(*TODO: update usage notes to be more readble without a Frontend.*)
 Clear[GlobalGrowthConstants]
 GlobalGrowthConstants::usage="\
 GlobalGrowthConstants[c] estimates series coefficient growth constants K and M according to |(c, \[Eta])| <= KM^(|\[Eta]|).
@@ -145,7 +146,7 @@ UltrametericDistance[c, d, r] finds the ultrametric distance between the series 
 Clear[WordLength]
 WordLength::usage="\
 WordLength[x] returns the length of the word x.
-WordLength[x, x_i] returns the number of occurences of the letter x_i in x."
+WordLength[x, x_i] returns the number of occurrences of the letter x_i in x."
 
 
 Begin["`Private`"]
@@ -239,29 +240,6 @@ FirstLetter[a_] := FirstLetterAux[ExpandNonCommutativeMultiply[a]]
 
 (* GlobalGrowthConstant *)
 Clear[GlobalGrowthConstantsAux]
-
-(*GlobalGrowthConstants[c_] := GlobalGrowthConstantAux[c]
-GlobalGrowthConstants[c_, x_List] := (mod = LinearModelFit[GlobalGrowthConstantAux[c, x], x, x];
-	Print[mod["ParameterTable"]];
-	E^mod["BestFitParameters"])
-   
-  GlobalGrowthConstantAux[a_Plus] := GlobalGrowthConstantAux[Map[GlobalGrowthConstantAux, Apply[List, a]]]
-  GlobalGrowthConstantAux[b_List] := (grp = Split[b, #1[[1]] == #2[[1]] &];
-    a = Table[{grp[[j]][[1]][[1]], Max[Table[grp[[j]][[i]][[2]], {i, Length[grp[[j]]]}]]}, {j, Length[grp]}];
-    nrm = Normal[LinearModelFit[a, x, x]];
-	nrml = nrm + Max[Table[a[[i]][[2]] - (nrm /. x -> (a[[i]][[1]])), {i, 1, Length[a]}]]; 
-	Print[Show[ListPlot[a, PlotStyle -> Red, AxesLabel -> {"|\[Eta]|", "ln[|(c,\[Eta])|]"}], 
-		Plot[nrml, {x, 0, Length[a]}]]];
-    {E^(nrml /. x -> 0), E^Coefficient[nrml, x]})
-  GlobalGrowthConstantAux[c_?CommutativeQ] := List[0, Log[Abs[c]]]
-  GlobalGrowthConstantAux[(c_:1) * w_] := List[WordLength[w], Log[Abs[c]]]
-
-  (* Fine growth case *)
-  GlobalGrowthConstantAux[s_Plus, x_List] := Map[GlobalGrowthConstantAux[#, x]&, Apply[List, s]]
-  GlobalGrowthConstantAux[w_?CommutativeQ, x_List] := Flatten[{Table[0, {n, 1, Length[x]}],
-  	Abs[Log[Abs[w]]]}]
-  GlobalGrowthConstantAux[(c_:1) * w_, x_List] := Flatten[{Table[WordLength[w, x[[n]]], {n,1,Length[x]}],
-  	Abs[Log[Abs[c]]]}]*)
   	
 GlobalGrowthConstants[c_] := GlobalGrowthConstantsAux[ExpandNonCommutativeMultiply@c]
 GlobalGrowthConstants[c_, x_List] := 
