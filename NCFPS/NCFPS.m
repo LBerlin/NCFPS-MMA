@@ -560,13 +560,15 @@ RightAugment[a_, i_, x_List] := 0
 (*--------------------------------------------------------------*)
 
 (*ScalarProduct*)
-ScalarProduct[c_, d_] :=
-  ImproperPart@c*ImproperPart@d +
-    Sum[
-      Coefficient[c, i]*Coefficient[d, i]
-      ,
-      {i, Intersection[Support@ProperPart@c, Support@ProperPart@d]}
-    ]
+ScalarProduct1[c_, d_] :=
+  Module[{cExp = NCExpand@c, dExp = NCExpand@d},
+    ImproperPart@cExp*ImproperPart@dExp +
+      Sum[
+        Coefficient[cExp, i]*Coefficient[dExp, i]
+        ,
+        {i, Intersection[Support@ProperPart@cExp, Support@ProperPart@dExp]}
+      ]
+  ]
 
 (*--------------------------------------------------------------*)
 

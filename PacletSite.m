@@ -1,5 +1,5 @@
 (* Created with the Wolfram Language for Students - Personal Use Only : www.wolfram.com *)
-PacletSite[Paclet[Name -> "NCFPS", Version -> "0.1.4", 
+PacletSite[Paclet[Name -> "NCFPS", Version -> "0.1.5", 
   MathematicaVersion -> "6+", Extensions -> 
    {{"Kernel", Root -> ".", Context -> "NCFPS`"}, 
     {"Documentation", Language -> "English", 
