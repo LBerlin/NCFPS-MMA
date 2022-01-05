@@ -119,6 +119,10 @@ Clear[RightAugment]
 RightAugment::usage="\
 RightAugment[a, i, x] performs a right-hand augmentation by x_i on the coordinate functions in a."
 
+Clear[ScalarProduct]
+ScalarProduct::usage="\
+ScalarProduct[c, d] returns the scalar product of series c and series d."
+
 Clear[ShuffleInverse]
 ShuffleInverse::usage="\
 ShuffleInverse[c, deg] calculates the shuffle inverse of series c, truncated to degree deg."
@@ -129,7 +133,7 @@ ShufflePower[c, power] calculates the shuffle product of series c with itself, r
 
 Clear[ShuffleProduct]
 ShuffleProduct::usage="\
-ShuffleProduct[c, d] returns the shuffle product of two series."
+ShuffleProduct[c, d] returns the shuffle product of series c and series d."
 
 Clear[Support]
 Support::usage="\
@@ -552,6 +556,17 @@ RightAugment[a_Times, i_, x_List] :=
 RightAugment[a_A^exp_, i_, x_List] := exp * a^(exp - 1) * RightAugment[a, i, x]
 RightAugment[a_A, i_, x_List] := A[a[[1]], a[[2]] ** x[[i + 1]]]
 RightAugment[a_, i_, x_List] := 0
+
+(*--------------------------------------------------------------*)
+
+(*ScalarProduct*)
+ScalarProduct[c_, d_] :=
+  ImproperPart@c*ImproperPart@d +
+    Sum[
+      Coefficient[c, i]*Coefficient[d, i]
+      ,
+      {i, Intersection[Support@ProperPart@c, Support@ProperPart@d]}
+    ]
 
 (*--------------------------------------------------------------*)
 
