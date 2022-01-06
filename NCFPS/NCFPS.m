@@ -560,12 +560,14 @@ RightAugment[a_, i_, x_List] := 0
 (*--------------------------------------------------------------*)
 
 (*ScalarProduct*)
-ScalarProduct1[c_, d_] :=
+ScalarProduct[c_, d_] :=
   Module[{cExp = NCExpand@c, dExp = NCExpand@d},
-    ImproperPart@cExp*ImproperPart@dExp +
+    (*Multiply the constant terms*)
+    ImproperPart@cExp * ImproperPart@dExp +
       Sum[
-        Coefficient[cExp, i]*Coefficient[dExp, i]
+        Coefficient[cExp, i] * Coefficient[dExp, i]
         ,
+        (*Only sum the words in both supports*)
         {i, Intersection[Support@ProperPart@cExp, Support@ProperPart@dExp]}
       ]
   ]
