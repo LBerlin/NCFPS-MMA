@@ -4,7 +4,7 @@
 
 SNC[m, n];
 alph = {m, n};
-series = {m, n, m + n, n - m, m - n, 2*m, 2*n, n*2, m*2, 
+series = {2, m, n, m + n, n - m, m - n, 2*m, 2*n, n*2, m*2,
 	2 + m, m + 2, 2 - m, m - 2,	2 + n, n + 2, 2 - n, n - 2, 
 	a*m, m*a, a*n, n*a, z*m, m*z, z*n, n*z, 
 	a + m, a + n, a - m, a - n, m - a, n - a, 
