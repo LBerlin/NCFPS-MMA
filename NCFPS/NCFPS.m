@@ -44,6 +44,10 @@ Clear[FirstLetter]
 FirstLetter::usage="\
 FirstLetter[w] returns the first letter of the word w, extended linearly to series."
 
+Clear[HelpNCFPS]
+HelpNCFPS::usage="\
+List all functions associated with the NCFPS package."
+
 Clear[ImproperPart]
 ImproperPart::usage="\
 ImproperPart[c] returns the portion of c with words of length 0."
@@ -284,6 +288,11 @@ GlobalGrowthConstantsAux[(c_ : 1)*w_, x_List] :=
  Flatten[{Table[WordLength[w, x[[n]]], {n, 1, Length@x}], 
    Abs@Log@Abs@c}]
  
+(*--------------------------------------------------------------*)
+
+(*HelpNCFPS*)
+HelpNCFPS := ?NCFPS`*
+
 (*--------------------------------------------------------------*)
 
 (*ImproperPart*)
