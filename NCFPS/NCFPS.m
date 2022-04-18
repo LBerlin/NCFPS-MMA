@@ -200,14 +200,28 @@ CompositionProduct[a_, b_List, x_List] := CompositionProductAux[a, b, x]
 CompositionProduct[a_, x_List, n_Integer] := Nest[CompositionProductAux[#, {a}, x]&, a, n-1]
 CompositionProduct[a_, x_List, 0] := 1
 
-  CompositionProductAux[a_Plus, b_List, x_List] := CompositionProductAux[#, b, x] & /@ a  
-  CompositionProductAux[a_?CommutativeQ, b_List, x_List] := a 
-  CompositionProductAux[(c_: 1) * HoldPattern[a_Symbol ** b1__], b_List, x_List] := 
-  	ExpandNonCommutativeMultiply[c * If[SameQ[a, First[x]], First[x] ** CompositionProductAux[NonCommutativeMultiply[b1], 
-    NonCommutativeMultiply[b], x],First[x] ** ShuffleProduct[NonCommutativeMultiply[
-    Part[b, Part[Flatten[Position[x, a]] - 1, 1]]], CompositionProductAux[NonCommutativeMultiply[b1], NonCommutativeMultiply[b], x]]]]
-  CompositionProductAux[(c_: 1) * a_Symbol, b_List, x_List] := 
-	ExpandNonCommutativeMultiply[c * If[SameQ[a, First[x]], First[x], First[x] ** Part[b, Part[Flatten[Position[x, a]] - 1, 1]]]]
+CompositionProductAux[a_Plus, b_List, x_List] := CompositionProductAux[#, b, x] & /@ a
+CompositionProductAux[a_?CommutativeQ, b_List, x_List] := a
+CompositionProductAux[(c_: 1) * HoldPattern[a_Symbol ** b1__], b_List, x_List] :=
+	ExpandNonCommutativeMultiply[
+    c *
+        If[SameQ[a, First[x]],
+          First[x] ** CompositionProductAux[NonCommutativeMultiply[b1], NonCommutativeMultiply[b], x],
+          First[x] **
+              ShuffleProduct[
+                NonCommutativeMultiply[Part[b, Part[Flatten[Position[x, a]] - 1, 1]]],
+                CompositionProductAux[NonCommutativeMultiply[b1], NonCommutativeMultiply[b], x]
+              ]
+        ]
+  ]
+CompositionProductAux[(c_: 1) * a_Symbol, b_List, x_List] :=
+	ExpandNonCommutativeMultiply[
+    c *
+        If[SameQ[a, First[x]],
+          First[x],
+          First[x] ** Part[b, Part[Flatten[Position[x, a]] - 1, 1]]
+        ]
+  ]
 
 (*--------------------------------------------------------------*)
 
@@ -216,12 +230,16 @@ Clear[CompressWordAux]
 
 CompressWord[a_] := CompressWordAux[DeCompressWord[a]]
 
-  CompressWordAux[a_Plus] := Map[CompressWord, a]
-  CompressWordAux[c_ * a_NonCommutativeMultiply] := c * CompressWord[a]
-  CompressWordAux[a_NonCommutativeMultiply] := (sets = Split[Apply[List,a]];
-  	Apply[NonCommutativeMultiply, Table[Power[sets[[i]][[1]], Length[sets[[i]]]], 
-  	{i, 1, Length[sets]}]])
-  CompressWordAux[a_] := a
+CompressWordAux[a_Plus] := Map[CompressWord, a]
+CompressWordAux[c_ * a_NonCommutativeMultiply] := c * CompressWord[a]
+CompressWordAux[a_NonCommutativeMultiply] :=
+  Module[{sets},
+    sets = Split[Apply[List, a]];
+ 	  Apply[NonCommutativeMultiply,
+      Table[Power[sets[[i, 1]], Length[sets[[i]]]], {i, 1, Length[sets]}]
+    ]
+  ]
+CompressWordAux[a_] := a
 
 (*--------------------------------------------------------------*)
 
