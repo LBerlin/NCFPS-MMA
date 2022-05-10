@@ -275,7 +275,8 @@ Module[
   E^mod["BestFitParameters"]
 ]
 
-GlobalGrowthConstantsAux[a_Plus] := GlobalGrowthConstantsAux[Map[GlobalGrowthConstantsAux, Apply[List, a]]]
+GlobalGrowthConstantsAux[a_Plus] :=
+  GlobalGrowthConstantsAux[Map[GlobalGrowthConstantsAux, Apply[List, a]]]
 GlobalGrowthConstantsAux[b_List] :=
  Module[
   {grp = Split[b, #1[[1]] == #2[[1]] &], a, nrm, nrml, x},
@@ -354,9 +355,13 @@ LanguageFilter[c_, x__List] := LanguageFilterAux[ExpandNonCommutativeMultiply[c]
 (* Left Shift *)
 Clear[LeftShiftAux]
 
-LeftShift[polynomial_, monomial_] := LeftShiftAux[ExpandNonCommutativeMultiply[polynomial], monomial]
+LeftShift[polynomial_, monomial_] :=
+  LeftShiftAux[ExpandNonCommutativeMultiply[polynomial], monomial]
 LeftShift[polynomial_, monomial_, n_Integer?NonNegative] := 
-    LeftShiftAux[ExpandNonCommutativeMultiply[polynomial], Nest[NonCommutativeMultiply[#, monomial]&, 1, n]]
+  LeftShiftAux[
+    ExpandNonCommutativeMultiply[polynomial],
+    Nest[NonCommutativeMultiply[#, monomial]&, 1, n]
+  ]
 
   LeftShiftAux[polynomial_Plus, monomial_] := Map[LeftShiftAux[#, monomial]&, polynomial]
   LeftShiftAux[(a_:1) * monomial_, monomial_] := a
@@ -379,7 +384,8 @@ LocalGrowthConstants[c_, x_List] :=
 	E^mod["BestFitParameters"]
   ]
 
-  LocalGrowthConstantsAux[a_Plus] := LocalGrowthConstantsAux[Map[LocalGrowthConstantsAux, Apply[List, a]]]
+  LocalGrowthConstantsAux[a_Plus] :=
+    LocalGrowthConstantsAux[Map[LocalGrowthConstantsAux, Apply[List, a]]]
   LocalGrowthConstantsAux[b_List] := 
     Module[
       {grp = Split[b, #1[[1]] == #2[[1]] &], a, nrm, nrml, x},
@@ -404,9 +410,17 @@ LocalGrowthConstants[c_, x_List] :=
 
   (* Fine Growth Case *)
   LocalGrowthConstantsAux[s_Plus, x_List] := Map[LocalGrowthConstantsAux[#, x]&, Apply[List, s]]
-  LocalGrowthConstantsAux[w_?CommutativeQ, x_List] := Flatten[{ConstantArray[0, Length@x], Abs@Log@Abs@w}]
-  LocalGrowthConstantsAux[(c_:1) * w_, x_List] := Flatten[{Table[WordLength[w, x[[n]]], {n, 1, Length@x}],
-  	Abs[Log@Abs@c / Apply[Times, Table[WordLength[w, x[[n]]]!, {n, Length@x}]]]}]
+  LocalGrowthConstantsAux[w_?CommutativeQ, x_List] :=
+    Flatten[{ConstantArray[0, Length@x], Abs@Log@Abs@w}]
+  LocalGrowthConstantsAux[(c_:1) * w_, x_List] :=
+    Flatten[{Table[WordLength[w, x[[n]]], {n, 1, Length@x}],
+  	  Abs[
+        Log@Abs@c /
+          Apply[Times,
+            Table[WordLength[w, x[[n]]]!, {n, Length@x}]
+          ]
+      ]
+    }]
 
 (*--------------------------------------------------------------*)
 
