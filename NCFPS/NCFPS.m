@@ -431,12 +431,35 @@ MCF10[a_,c_]:=a/.<|A[1]->ImproperPart[c]|>~Join~Association[Map[A[#]->Coefficien
 MCFOld[a_,c_]:=a/.({A[1]->ImproperPart[c]}~Join~Map[A[#]->Coefficient[c,#]&,DeleteCases[Support[c],_?CommutativeQ]])/.{_A->0}
 
 MapCoordinateFunctions[a_,c_]:=If[$VersionNumber<10,MCFOld[a,ExpandNonCommutativeMultiply[c]],MCF10[a,ExpandNonCommutativeMultiply[c]]]*)
-MapCoordinateFunctions[a_, c_List] := a /. (<|MapIndexed[A[#2[[1]], 1] -> 
-	ImproperPart[#]&, c]|> ~Join~ Association[MapIndexed[Map[Function[u, A[#2[[1]], u] -> 
-	Coefficient[#, u]], DeleteCases[Support[#], _?CommutativeQ]]&, c]]) /. {_A -> 0}
-MapCoordinateFunctions[a_, c_] := a /. <|A[1, 1] -> ImproperPart[c]|> ~Join~ 
-	Association[Map[A[1, #] -> Coefficient[c, #]&, DeleteCases[Support[c],
-	_?CommutativeQ]]] /. {_A -> 0}
+MapCoordinateFunctions[a_, c_List] :=
+  a /.
+    Join[
+      <|
+        MapIndexed[
+          A[#2[[1]], 1] -> ImproperPart[#]&,
+          c
+        ]
+      |>,
+      <|
+        MapIndexed[
+          Map[
+            Function[u, A[#2[[1]], u] -> Coefficient[#, u]],
+            DeleteCases[Support[#], _?CommutativeQ]
+          ]&,
+          c
+        ]
+      |>
+    ] /. {_A -> 0}
+MapCoordinateFunctions[a_, c_] :=
+  a /.
+    Join[
+      <|A[1, 1] -> ImproperPart[c]|>,
+      <|
+        Map[
+          A[1, #] -> Coefficient[c, #]&,
+          DeleteCases[Support[c], _?CommutativeQ]]
+      |>
+    ] /. {_A -> 0}
 
 (*--------------------------------------------------------------*)
 
@@ -450,14 +473,35 @@ ModifiedCompositionProduct[a_, x_List, 0] := 1
   ModifiedCompositionProductAux[a_Plus, b_List, x_List] := ModifiedCompositionProductAux[#, b, x] & /@ a 
   ModifiedCompositionProductAux[a_?CommutativeQ, b_List, x_List] := a 
   ModifiedCompositionProductAux[(c_:1) * HoldPattern[a_Symbol ** b1__], b_List, x_List] := 
-   	ExpandNonCommutativeMultiply[If[SameQ[a, First[x]], c * First[x] ** 
-   	ModifiedCompositionProductAux[NonCommutativeMultiply[b1], NonCommutativeMultiply[b], x], 
-   	c * a ** ModifiedCompositionProductAux[NonCommutativeMultiply[b1],NonCommutativeMultiply[b], x] + 
-   	c * First[x] ** ShuffleProduct[NonCommutativeMultiply[Part[b, Part[Flatten[Position[x, a]] - 1, 1]]], 
-   	ModifiedCompositionProductAux[NonCommutativeMultiply[b1], NonCommutativeMultiply[b], x]]]]
+   	ExpandNonCommutativeMultiply[
+      If[SameQ[a, First@x],
+        c * First[x] ** ModifiedCompositionProductAux[NonCommutativeMultiply[b1], NonCommutativeMultiply[b], x],
+        c * a ** ModifiedCompositionProductAux[NonCommutativeMultiply[b1],NonCommutativeMultiply[b], x] + c * First[x] **
+          ShuffleProduct[
+            NonCommutativeMultiply[
+              Part[b,
+                Part[Flatten[Position[x, a]] - 1,
+                  1
+                ]
+              ]
+            ],
+            ModifiedCompositionProductAux[NonCommutativeMultiply[b1], NonCommutativeMultiply[b], x]
+          ]
+      ]
+    ]
   ModifiedCompositionProductAux[(c_:1) * a_Symbol, b_List, x_List] := 
-   	ExpandNonCommutativeMultiply[c * If[SameQ[a, First[x]], First[x], a + First[x] ** 
-   	Part[b, Part[Flatten[Position[x, a]] - 1, 1]]]]
+   	ExpandNonCommutativeMultiply[
+      c *
+        If[SameQ[a, First@x],
+          First@x,
+          a + First[x] **
+            Part[b,
+              Part[Flatten[Position[x, a]] - 1,
+                1
+              ]
+            ]
+        ]
+    ]
 
 (*--------------------------------------------------------------*)
 
