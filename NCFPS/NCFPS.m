@@ -509,24 +509,21 @@ ModifiedCompositionProduct[a_, x_List, 0] := 1
 Clear[NCDegreeAux]
 
 (*Full Degree*)
-NCDegree[a_] := NCDegreeAux[ExpandNonCommutativeMultiply[a]]
+NCDegree[a_] := NCDegreeAux[ExpandNonCommutativeMultiply@a]
 
-  NCDegreeAux[a_Plus] := 
-    Max[Map[NCDegreeAux, Apply[List, a]]]
+  NCDegreeAux[a_Plus] := Max@Map[NCDegreeAux, List@@a]
   NCDegreeAux[0] := -Infinity
   NCDegreeAux[a_?CommutativeQ] := 0
-  NCDegreeAux[(c_: 1) * HoldPattern[a_NonCommutativeMultiply]] := Length[a]
+  NCDegreeAux[(c_: 1) * HoldPattern[a_NonCommutativeMultiply]] := Length@a
   NCDegreeAux[a_] := 1
   
 (*Partial Degree*)
-NCDegree[a_, x_Symbol] := NCDegreeAux[ExpandNonCommutativeMultiply[a], x]
+NCDegree[a_, x_Symbol] := NCDegreeAux[ExpandNonCommutativeMultiply@a, x]
     
-  NCDegreeAux[a_Plus, x_Symbol] := 
-    Max[Map[NCDegreeAux[#, x] &, Apply[List, a]]]
+  NCDegreeAux[a_Plus, x_Symbol] := Max@Map[NCDegreeAux[#, x] &, List@@a]
   NCDegreeAux[0, x_Symbol] := -Infinity
   NCDegreeAux[a_?CommutativeQ, x_Symbol] := 0
-  NCDegreeAux[(c_: 1) * HoldPattern[a_NonCommutativeMultiply], x_Symbol] := 
-  	Count[a, x]
+  NCDegreeAux[(c_: 1) * HoldPattern[a_NonCommutativeMultiply], x_Symbol] := Count[a, x]
   NCDegreeAux[(c_:1) * x_, x_Symbol] := 1
   NCDegreeAux[a_, x_Symbol] := 0
 
