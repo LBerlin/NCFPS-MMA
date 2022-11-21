@@ -509,7 +509,7 @@ ModifiedCompositionProduct[a_, x_List, 0] := 1
 Clear[NCDegreeAux]
 
 (*Full Degree*)
-NCDegree[a_] := NCDegreeAux[ExpandNonCommutativeMultiply@a]
+NCDegree[a_] := NCDegreeAux@ExpandNonCommutativeMultiply@a
 
   NCDegreeAux[a_Plus] := Max@Map[NCDegreeAux, List@@a]
   NCDegreeAux[0] := -Infinity
@@ -533,18 +533,18 @@ NCDegree[a_, x_Symbol] := NCDegreeAux[ExpandNonCommutativeMultiply@a, x]
 Clear[NCOrderAux]
 
 (*Full Order*)
-NCOrder[a_] := NCOrderAux[ExpandNonCommutativeMultiply[a]]
+NCOrder[a_] := NCOrderAux@ExpandNonCommutativeMultiply@a
 
-  NCOrderAux[a_Plus] := Min[Map[NCOrder, Apply[List, a]]]
-  NCOrderAux[(c_:1) * a_NonCommutativeMultiply] := Length[a]
+  NCOrderAux[a_Plus] := Min@Map[NCOrder, List@@a]
+  NCOrderAux[(c_:1) * a_NonCommutativeMultiply] := Length@a
   NCOrderAux[(c_:1) * a_Symbol] := 1
   NCOrderAux[0] := Infinity
   NCOrderAux[a_] := 0
 
 (*Partial Order*)
-NCOrder[a_, x_Symbol] := NCOrderAux[ExpandNonCommutativeMultiply[a], x]
+NCOrder[a_, x_Symbol] := NCOrderAux[ExpandNonCommutativeMultiply@a, x]
 
-  NCOrderAux[a_Plus, x_Symbol] := Min[Map[NCOrder[#, x]&, Apply[List, a]]]
+  NCOrderAux[a_Plus, x_Symbol] := Min@Map[NCOrder[#, x] &, List@@a]
   NCOrderAux[(c_:1) * a_NonCommutativeMultiply, x_Symbol] := Count[a, x]
   NCOrderAux[(c_:1) * a_Symbol, x_Symbol] := If[SameQ[a, x], 1, 0]
   NCOrderAux[0, x_Symbol] := Infinity
@@ -553,7 +553,7 @@ NCOrder[a_, x_Symbol] := NCOrderAux[ExpandNonCommutativeMultiply[a], x]
 (*--------------------------------------------------------------*)
 
 (* NCPrefix *)
-NCPrefix[w_, x_List] := Flatten[Inner[NonCommutativeMultiply, {{w}}, {{x}}, Plus]]
+NCPrefix[w_, x_List] := Flatten@Inner[NonCommutativeMultiply, {{w}}, {{x}}, Plus]
 
 (*--------------------------------------------------------------*)
 
@@ -566,17 +566,17 @@ pPrime[p_] := ExpandNonCommutativeMultiply[1 - (1 / (p - ProperPart[p])) * p]
 (* ProductPower *)
 ProductPower[f_, s_, 0] := 1
 ProductPower[f_, s_, 0, a_] := 1
-ProductPower[f_, s_, n_Integer] := Nest[f[#, s]&, s, n-1]
-ProductPower[f_, s_, n_Integer, a_] := Nest[f[#, {s}, a]&, s, n-1]
+ProductPower[f_, s_, n_Integer] := Nest[f[#, s] &, s, n-1]
+ProductPower[f_, s_, n_Integer, a_] := Nest[f[#, {s}, a] &, s, n-1]
 
 (*--------------------------------------------------------------*)
 
 (* ProperPart *)
 Clear[ProperPartAux]
 
-ProperPart[a_] := ProperPartAux[ExpandNonCommutativeMultiply[a]]
+ProperPart[a_] := ProperPartAux @ ExpandNonCommutativeMultiply @ a
 
-  ProperPartAux[a_Plus] := Map[ProperPartAux, a]
+  ProperPartAux[a_Plus] := ProperPartAux /@ a
   ProperPartAux[a_?CommutativeQ] := 0
   ProperPartAux[a_] := a
 
@@ -585,14 +585,14 @@ ProperPart[a_] := ProperPartAux[ExpandNonCommutativeMultiply[a]]
 (* ProperQ *)
 Clear[ProperQAux]
 
-ProperQ[a_] := ProperQAux[ExpandNonCommutativeMultiply[a]]
+ProperQ[a_] := ProperQAux @ ExpandNonCommutativeMultiply @ a
 
-  ProperQAux[a_Plus] := Apply[And, Map[ProperQAux, Apply[List, a]]]
+  ProperQAux[a_Plus] := And @@ Map[ProperQAux, List @@ a]
   ProperQAux[0] := True
   ProperQAux[a_?CommutativeQ] := False
   ProperQAux[a_] := True
 
-  
+
 (*--------------------------------------------------------------*)
 
 (*RealizationToSeries*)
