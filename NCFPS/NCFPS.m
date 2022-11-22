@@ -649,12 +649,37 @@ RealizationToSeries[l1_List, f_, ic_List, x_List, d_Integer?Positive] :=
 (*--------------------------------------------------------------*)
 
 (* RelativeDegree *)
-RelativeDegree[poly_, x_List, a_Symbol] := Module[{supp = Support[poly], suppF, relDeg},
-	suppF = Select[supp, # =!= a && LeftShift[#, a, Length[#]] =!= 1&];
-	relDeg = Min @ Table[Catch[If[Length[suppF[[i]]] > 0, For[j = 1, j <= Length[suppF[[i]]],
-		j++, If[suppF[[i]][[j]] =!= a, Throw[j]]], Throw[1]]], {i, 1, Length[suppF]}];
-	If[relDeg != Infinity && MemberQ[supp, Apply[NonCommutativeMultiply, 
-		Nest[Prepend[#, a]&, Cases[x, Except[a]], relDeg - 1]]], {relDeg}, {}]]
+RelativeDegree[poly_, x_List, a_Symbol] :=
+  Module[ {supp = Support[poly], suppF, relDeg},
+    suppF = Select[supp, # =!= a && LeftShift[#, a, Length@#] =!= 1 &];
+    relDeg = Min @
+      Table[
+        Catch[
+          If[
+            Length[suppF[[i]]] > 0,
+            For[
+              j = 1,
+              j <= Length[suppF[[i]]],
+              j++,
+              If[
+                suppF[[i,j]] =!= a,
+                Throw[j]
+              ]
+            ],
+            Throw[1]
+          ]
+        ],
+        {i, 1, Length[suppF]}
+      ];
+    If[
+      relDeg != Infinity &&
+        MemberQ[
+          supp,
+          NonCommutativeMultiply@@Nest[Prepend[#, a] &, Cases[x, Except@a], relDeg - 1]],
+      {relDeg},
+      {}
+    ]
+  ]
 
 (*--------------------------------------------------------------*)
 
