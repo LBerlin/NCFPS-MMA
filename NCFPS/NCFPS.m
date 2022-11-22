@@ -685,10 +685,14 @@ RelativeDegree[poly_, x_List, a_Symbol] :=
 
 (*RhoRightAugment*)
 (*There is no need to include a Liebniz rule in this function since it will be resolved when RightAugment is called.*)
-RhoRightAugment[a_Plus, i_, x_List] := Map[RhoRightAugment[#, i, x]&, a]
+RhoRightAugment[a_Plus, i_, x_List] := Map[RhoRightAugment[#, i, x] &, a]
 RhoRightAugment[a_, 0, x_List] := 
 	RhoRightAugment[a, 0, x] = 
-		-RightAugment[a, 0, x] + Sum[A[ic, 1] * RightAugment[a, ic, x], {ic, 1, Length[x] - 1}]
+		-RightAugment[a, 0, x] +
+    Sum[
+      A[ic, 1] * RightAugment[a, ic, x],
+      {ic, 1, Length@x - 1}
+    ]
 RhoRightAugment[a_, i_, x_List] := -RightAugment[a, i, x]
   
 (*--------------------------------------------------------------*)
