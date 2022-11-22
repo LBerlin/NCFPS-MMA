@@ -597,13 +597,54 @@ ProperQ[a_] := ProperQAux @ ExpandNonCommutativeMultiply @ a
 
 (*RealizationToSeries*)
 RealizationToSeries[l1_List, f_, ic_List, x_List, d_Integer?Positive] := 
-	Part[Inner[NonCommutativeMultiply, {Flatten[NestList[Table[D[#, 
-	{Table[Symbol[StringInsert["z", ToString[n], -1]], {n, Length[ic]}]}].
-	Apply[l1[[j]], Table[Symbol[StringInsert["z", ToString[n], -1]], {n, Length[ic]}]], 
-	{j, Length[l1]}]&, Apply[f, Table[Symbol[StringInsert["z", ToString[n], -1]],
-	{n, Length[ic]}]], d] /. Table[Symbol[StringInsert["z", ToString[n], -1]] -> ic[[n]],
-	{n, Length[ic]}]]}, Flatten[NestList[Transpose[{Table[Inner[NonCommutativeMultiply, 
-	{{#}}, {{x[[k]]}}, Plus], {k, Length[x]}]}]&, 1, d]], Plus], 1]
+	Part[
+    Inner[
+      NonCommutativeMultiply,
+      {Flatten[
+        NestList[
+          Table[
+            D[
+              #,
+              {Table[
+                Symbol[StringInsert["z", ToString[n], -1]],
+                {n, Length[ic]}
+              ]}
+            ].Apply[l1[[j]],
+            Table[
+              Symbol[StringInsert["z", ToString[n], -1]],
+              {n, Length[ic]}
+            ]
+          ],
+          {j, Length[l1]}] &,
+          Apply[
+            f,
+            Table[
+              Symbol[StringInsert["z", ToString[n], -1]],
+              {n, Length[ic]}
+            ]
+          ],
+          d
+        ] /.
+          Table[
+            Symbol[StringInsert["z", ToString[n], -1]] -> ic[[n]],
+            {n, Length[ic]}
+          ]
+      ]},
+      Flatten[
+        NestList[
+          Transpose[{
+            Table[
+              Inner[NonCommutativeMultiply, {{#}}, {{x[[k]]}}, Plus],
+              {k, Length[x]}
+            ]
+          }] &,
+          1,
+          d]
+      ],
+      Plus
+    ],
+    1
+  ]
 
 (*--------------------------------------------------------------*)
 
