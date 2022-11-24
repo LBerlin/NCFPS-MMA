@@ -698,13 +698,16 @@ RhoRightAugment[a_, i_, x_List] := -RightAugment[a, i, x]
 (*--------------------------------------------------------------*)
 
 (*RightAugment*)
-(*TODO: It may become more sensible to turn to a form like RightAugment[A[1, x0], x1] rather than rely on the index and aphabet.
+(*TODO: It may become more sensible to turn to a form like RightAugment[A[1, x0], x1] rather than rely on the index and alphabet.
 		But then how to distinguish between the drift letter and other inputs?
 		- Take only drift letter instead of assuming alphabet is sorted. This is closer in-line to functions that assume variables.*)
-RightAugment[a_Plus, i_, x_List] := Map[RightAugment[#, i, x]&, a]
+RightAugment[a_Plus, i_, x_List] := Map[RightAugment[#, i, x] &, a]
 RightAugment[a_Times, i_, x_List] := 
 	RightAugment[a, i, x] =
-		Sum[MapAt[RightAugment[#, i, x]&, a, ic], {ic, Length[a]}]
+		Sum[
+      MapAt[RightAugment[#, i, x] &, a, ic],
+      {ic, Length@a}
+    ]
 RightAugment[a_A^exp_, i_, x_List] := exp * a^(exp - 1) * RightAugment[a, i, x]
 RightAugment[a_A, i_, x_List] := A[a[[1]], a[[2]] ** x[[i + 1]]]
 RightAugment[a_, i_, x_List] := 0
@@ -763,9 +766,9 @@ ShuffleProduct[a1_, b1_] := a1 ** b1 + b1 ** a1
 (* Support *)
 Clear[SupportAux]
 
-Support[a_] := SupportAux[ExpandNonCommutativeMultiply[a]]
+Support[a_] := SupportAux@ExpandNonCommutativeMultiply@a
 
-  SupportAux[a_Plus] := Union[Flatten[Map[SupportAux, Apply[List, a]]]]
+  SupportAux[a_Plus] := Union@Flatten@Map[SupportAux, Apply[List, a]]
   SupportAux[0] := {}
   SupportAux[a_?CommutativeQ] := {1}
   SupportAux[a_Times] := Select[Level[a, {1}], Not[CommutativeQ[#]]&]
@@ -775,9 +778,19 @@ Support[a_] := SupportAux[ExpandNonCommutativeMultiply[a]]
 
 (* TruncateSeries *)
 
-TruncateSeries[a_Plus, b_Integer] := Map[TruncateSeries[#, b]&, a]
-TruncateSeries[Times[a_, c__], b_Integer] := If[WordLength[a] > b, 0, c * a] /; Not[CommutativeQ[a]]
-TruncateSeries[a_, b_Integer] := If[WordLength[a] > b, 0, a]
+TruncateSeries[a_Plus, b_Integer] := Map[TruncateSeries[#, b] &, a]
+TruncateSeries[Times[a_, c__], b_Integer] :=
+  If[
+    WordLength@a > b,
+    0,
+    c * a
+  ] /; Not@CommutativeQ@a
+TruncateSeries[a_, b_Integer] :=
+  If[
+    WordLength@a > b,
+    0,
+    a
+  ]
   (*TruncateSeries[c_,n_Integer]:=(c-ProperPart[c])+Take[Coefficient[c,Support[Drop[c,1]]],
    Length[Select[WordLengthList[Support[ProperPart[c]]] ,#<=n&]]].Take[Support[ProperPart[c]],
     Length[Select[WordLengthList[Support[ProperPart[c]]] ,#<=n&]]]*)
@@ -793,19 +806,19 @@ UltrametricDistance[c_, d_, r_] := r^NCOrder[c - d]
 Clear[WordLengthAux]
 
   (* Full Length *)
-WordLength[a_] := WordLengthAux[a]
+WordLength[a_] := WordLengthAux@a
 
   (* Result is undetermined for things other than monomials, including 0 *)
-  WordLengthAux[w_List] := Map[WordLength, w]
+  WordLengthAux[w_List] := WordLength /@ w
 
-  WordLengthAux[a_NonCommutativeMultiply] := Length[a]
+  WordLengthAux[a_NonCommutativeMultiply] := Length@a
   WordLengthAux[a_?CommutativeQ] := 0 (*/; Not[PossibleZeroQ[a]];*)
   WordLengthAux[a_Symbol] := 1
 
   (* Partial Length *)
 WordLength[a_, b_Symbol] := WordLengthAux[a, b] 
 
-  WordLengthAux[w_List, b_Symbol] := Map[Function[v, WordLength[v, b]], w]
+  WordLengthAux[w_List, b_Symbol] := Map[WordLength[#, b] &, w]
 
   WordLengthAux[a_NonCommutativeMultiply, b_Symbol] := Count[a, b]
   WordLengthAux[a_?CommutativeQ, b_Symbol] := 0 (*/; Not[PossibleZeroQ[a]];*)
