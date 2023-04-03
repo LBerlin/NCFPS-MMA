@@ -4,7 +4,7 @@
 
 Paclet[
     Name -> "NCFPS",
-    Version -> "0.1.6",
+    Version -> "0.1.7",
     MathematicaVersion -> "6+",
     Extensions -> 
         {
