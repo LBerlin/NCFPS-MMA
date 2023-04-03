@@ -45,3 +45,4 @@ If[FailureQ@CopyFile[#, FileNameJoin[{"Archive", #}]], $Failed,
 *)
 
 (* TODO: PacletSite location string automatically reflect the checked out branch *)
+(* TODO: Automatically add generated paclet file to git tracking *)
