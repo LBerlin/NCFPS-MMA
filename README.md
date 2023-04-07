@@ -106,3 +106,5 @@ For any problems/bugs/issues/concerns please open an issue in the *Issues* tab a
 ## Acknowledgments
 
 Development of this package was supported in part by the National Science Foundation under grants CMMI-1839378 and CMMI-1839387.
+
+This package makes use of functionality from the excellent NCAlgebra package. If your noncommutative algebra needs extend beyond formal power series, we highly recommend taking a look at NCAlgebra.
