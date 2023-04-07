@@ -49,6 +49,10 @@ Now it should be possible to load in NCFPS, even after restarting Mathematica.
 <<NCFPS`
 ```
 
+### No Mathematica?
+
+No problem! Visit our [Wiki page](https://github.com/LBerlin/NCFPS-MMA/wiki/Take-NCFPS-for-a-Test-Drive) to see how you can get started with NCFPS without a Mathematica installation.
+
 ## Updating
 
 ### From the Repository
