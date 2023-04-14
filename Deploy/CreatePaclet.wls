@@ -4,6 +4,7 @@
  Can be run with WolframScript.
  In Eclipse, right-click -> Open With -> Other... ->
  External Programs -> WolframScript
+ In IntelliJ IDEA, right-click -> External Tools ->
 *)
 
 CreatePacletArchive::versionExists = 
