@@ -1,0 +1,75 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      1983,         65]
+NotebookOptionsPosition[      1626,         51]
+NotebookOutlinePosition[      2030,         67]
+CellTagsIndexPosition[      1987,         64]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"paclet", "=", 
+   RowBox[{"Import", "[", "\"\<..\\\\NCFPS\\\\PacletInfo.m\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"siteInfo", "=", 
+   RowBox[{"PacletSite", "[", 
+    RowBox[{"Append", "[", 
+     RowBox[{"paclet", ",", 
+      RowBox[{
+      "Location", "\[Rule]", 
+       "\"\<https://raw.githubusercontent.com/LBerlin/NCFPS-MMA/main\>\""}]}],
+      "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{"\"\<..\\\\PacletSite.m\>\"", ",", "siteInfo"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"CreateArchive", "[", 
+   RowBox[{
+   "\"\<..\\\\PacletSite.m\>\"", ",", "\"\<..\\\\PacletSite.mz\>\"", ",", 
+    RowBox[{"OverwriteTarget", "\[Rule]", "True"}]}], "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.8911898984678664`*^9, 
+  3.8911899559364967`*^9}},ExpressionUUID->"5cdca412-f4ed-49b6-b8cb-\
+e43adc2a5a21"]
+},
+WindowSize->{574.8, 579.6},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"13.2 for Microsoft Windows (64-bit) (November 18, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"fb2ea664-b7ad-426d-84ec-0876ad03429c"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 1064, 29, 200, "Input",ExpressionUUID->"5cdca412-f4ed-49b6-b8cb-e43adc2a5a21"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
