@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      2015,         59]
-NotebookOptionsPosition[      1458,         43]
-NotebookOutlinePosition[      1881,         59]
-CellTagsIndexPosition[      1838,         56]
+NotebookDataLength[      4333,        116]
+NotebookOptionsPosition[      3363,         95]
+NotebookOutlinePosition[      3828,        112]
+CellTagsIndexPosition[      3785,        109]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -27,22 +27,75 @@ Cell[BoxData[{
  CellChangeTimes->{{3.8529334251363373`*^9, 3.852933438111994*^9}, {
   3.8529335403635287`*^9, 3.852933629375189*^9}, {3.8529340786887875`*^9, 
   3.852934089269302*^9}, {3.8909163078345947`*^9, 3.8909163089613347`*^9}},
- CellLabel->"In[6]:=",ExpressionUUID->"1e921307-3cd9-4e80-83d3-1533a7658736"],
+ CellLabel->"In[1]:=",ExpressionUUID->"1e921307-3cd9-4e80-83d3-1533a7658736"],
 
 Cell[BoxData[
  RowBox[{"<<", "PacletTools`"}]], "Input",
- CellChangeTimes->{{3.8909162407400084`*^9, 
-  3.890916244918236*^9}},ExpressionUUID->"a6cbd06e-80aa-4a7c-b5ab-\
-446a292c8d2d"],
+ CellChangeTimes->{{3.8909162407400084`*^9, 3.890916244918236*^9}},
+ CellLabel->"In[3]:=",ExpressionUUID->"a6cbd06e-80aa-4a7c-b5ab-446a292c8d2d"],
 
 Cell[BoxData[
- RowBox[{"PacletBuild", "[", "\"\<../NCFPS\>\"", "]"}]], "Input",
- CellChangeTimes->{{3.890916249417003*^9, 
-  3.8909162962177477`*^9}},ExpressionUUID->"991c6135-630a-4021-ae41-\
-c1ced8e22a00"]
+ RowBox[{
+  RowBox[{"buildResult", "=", 
+   RowBox[{"PacletBuild", "[", "\"\<../NCFPS\>\"", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.890916249417003*^9, 3.8909162962177477`*^9}, {
+   3.891214015910742*^9, 3.8912140264954185`*^9}, 
+   3.8912152326165705`*^9},ExpressionUUID->"991c6135-630a-4021-ae41-\
+c1ced8e22a00"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Head", "@", "buildResult"}], "==", "Success"}], ",", 
+    RowBox[{"pacletFile", "=", 
+     RowBox[{
+      RowBox[{"buildResult", "[", 
+       RowBox[{"[", "2", "]"}], "]"}], "[", "\"\<PacletArchive\>\"", 
+      "]"}]}]}], "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.8912140000890503`*^9, 3.8912141093700523`*^9}, {
+   3.8912144860751576`*^9, 3.891214486386689*^9}, 
+   3.891215228375022*^9},ExpressionUUID->"801e10c8-5925-4422-a5df-\
+09a2565e64e6"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FileNameJoin", "[", 
+   RowBox[{"{", 
+    RowBox[{"\"\<../Paclets\>\"", ",", 
+     RowBox[{"FileNameTake", "[", "pacletFile", "]"}]}], "}"}], "]"}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.891214776956933*^9, 3.8912148375104704`*^9}, {
+   3.8912148840816755`*^9, 3.891214929826602*^9}, {3.8912149607053027`*^9, 
+   3.8912149684417405`*^9}, 
+   3.8912152244854217`*^9},ExpressionUUID->"46d7f4e1-a2f2-4add-8458-\
+d063ee0d19f6"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"RenameFile", "[", 
+   RowBox[{"pacletFile", ",", 
+    RowBox[{"FileNameJoin", "[", 
+     RowBox[{"{", 
+      RowBox[{"\"\<../Paclets\>\"", ",", 
+       RowBox[{"FileNameTake", "[", "pacletFile", "]"}]}], "}"}], "]"}]}], 
+   "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.891213348178409*^9, 3.8912133594954405`*^9}, {
+   3.891213436649625*^9, 3.8912135053380327`*^9}, 3.891215075451233*^9, {
+   3.891215123693738*^9, 3.891215127632265*^9}, 
+   3.891215213562213*^9},ExpressionUUID->"2a4bf2b9-f74e-4929-a379-\
+7aa077ddb837"],
+
+Cell[BoxData[
+ RowBox[{"(*", "FileNameSetter", "*)"}]], "Input",
+ CellChangeTimes->{{3.891214627321927*^9, 
+  3.8912146343677807`*^9}},ExpressionUUID->"626803a4-8a59-4573-a6db-\
+83c1d3260629"]
 },
 WindowSize->{574.8, 579.6},
 WindowMargins->{{Automatic, -4.7999999999999545`}, {Automatic, 0}},
+TaggingRules-><|"TryRealOnly" -> False|>,
 FrontEndVersion->"13.2 for Microsoft Windows (64-bit) (November 18, 2022)",
 StyleDefinitions->"Default.nb",
 ExpressionUUID->"37d14f20-4f96-4f0f-8395-810d94859629"
@@ -59,11 +112,13 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[558, 20, 499, 9, 48, "Input",ExpressionUUID->"1e921307-3cd9-4e80-83d3-1533a7658736"],
-Cell[1060, 31, 184, 4, 28, "Input",ExpressionUUID->"a6cbd06e-80aa-4a7c-b5ab-446a292c8d2d"],
-Cell[1247, 37, 207, 4, 28, "Input",ExpressionUUID->"991c6135-630a-4021-ae41-c1ced8e22a00"]
+Cell[1060, 31, 202, 3, 28, "Input",ExpressionUUID->"a6cbd06e-80aa-4a7c-b5ab-446a292c8d2d"],
+Cell[1265, 36, 336, 7, 28, "Input",ExpressionUUID->"991c6135-630a-4021-ae41-c1ced8e22a00"],
+Cell[1604, 45, 535, 14, 48, "Input",ExpressionUUID->"801e10c8-5925-4422-a5df-09a2565e64e6"],
+Cell[2142, 61, 462, 11, 28, "Input",ExpressionUUID->"46d7f4e1-a2f2-4add-8458-d063ee0d19f6"],
+Cell[2607, 74, 557, 13, 48, "Input",ExpressionUUID->"2a4bf2b9-f74e-4929-a379-7aa077ddb837"],
+Cell[3167, 89, 192, 4, 28, "Input",ExpressionUUID->"626803a4-8a59-4573-a6db-83c1d3260629"]
 }
 ]
 *)
-
-(* End of internal cache information *)
 
