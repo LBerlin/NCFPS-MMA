@@ -7,13 +7,20 @@
 
 <<PacletTools`
 
-PacletBuild::buildFailed =
+PacletBuild::buildFail =
     "Paclet build failed."
+PacletBuild::buildSuccess =
+    "Paclet build succeeded."
+RenameFile::copySuccess =
+    "Paclet moved to `1`."
 
 scriptDir = DirectoryName @ $InputFileName;
 SetDirectory @ scriptDir;
 
+copyDest = "../Paclets";
+Print["Importing paclet info..."]
 paclet = Import["..\\NCFPS\\PacletInfo.m"];
+Print["Appending site info location to paclet info..."]
 siteInfo =
     PacletSite[
       Append[paclet,
@@ -22,14 +29,17 @@ siteInfo =
       ]
     ];
 
+Print["Building paclet..."]
 buildResult = PacletBuild["../NCFPS"];
 
 If[
-    Head@buildResult == Success,
-    pacletFile = buildResult[[2]]["PacletArchive"];
-    RenameFile[
-      pacletFile,
-      FileNameJoin[{"../Paclets", FileNameTake[pacletFile]}]
-    ];,
-    Message[PacletBuild::buildFailed]
+  Head@buildResult == Success,
+  pacletFile = buildResult[[2]]["PacletArchive"];
+  Message[PacletBuild::buildSuccess];
+  pacletMove = RenameFile[
+    pacletFile,
+    FileNameJoin[{copyDest, FileNameTake[pacletFile]}]
+  ];
+  Message[RenameFile::copySuccess, pacletMove],
+  Message[PacletBuild::buildFail]
 ];
