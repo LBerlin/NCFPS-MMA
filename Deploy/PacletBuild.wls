@@ -35,7 +35,7 @@ buildResult = PacletBuild["../NCFPS"];
 If[
   Head@buildResult == Success,
   pacletFile = buildResult[[2]]["PacletArchive"];
-  Message[PacletBuild::buildSuccess];
+  Print["Build successful. Moving paclet..."];
   pacletMove = RenameFile[
     pacletFile,
     FileNameJoin[{copyDest, FileNameTake[pacletFile]}]
