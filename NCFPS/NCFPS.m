@@ -731,12 +731,12 @@ ScalarProduct[c_, d_] :=
 
 (*ShuffleInverse*)
 ShuffleInverse[p_, k_] := 
-	(1 / (p - ProperPart[p])) * Total[NestList[ShuffleProduct[pPrime[p], #]&, 1, k]]
+	(1 / (p - ProperPart[p])) * Total[NestList[NCExpand[ShuffleProduct[pPrime[p], #]]&, 1, k]]
 
 (*--------------------------------------------------------------*)
 
 (*ShufflePower*)
-  ShufflePower[p_, k_] := Nest[ShuffleProduct[p, #]&, 1, k]
+ShufflePower[p_, k_] := Nest[NCExpand[ShuffleProduct[p, #]]&, 1, k]
 
 (*--------------------------------------------------------------*)
 
