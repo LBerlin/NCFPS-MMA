@@ -741,25 +741,35 @@ ShufflePower[p_, k_] := Nest[NCExpand[ShuffleProduct[p, #]]&, 1, k]
 (*--------------------------------------------------------------*)
 
 (* Shuffle Product *)
-(* inspired by http://www2.fc.up.pt/mathschool/sites/default/files/symbol-nosol.pdf *)
+ShuffleProduct[(coeffA_ : 1)*a_Plus, b_] :=
+    coeffA * Map[ShuffleProduct[#, b] &, a]
+ShuffleProduct[a_, (coeffB_ : 1)*b_Plus] :=
+    coeffB * Map[ShuffleProduct[a, #] &, b]
 
-ShuffleProduct[a_Plus, b_] := ShuffleProduct[#, b] & /@ a
-ShuffleProduct[a_, b_Plus] := ShuffleProduct[a, #] & /@ b
+(* Shuffle of two words length > 1*)
+ShuffleProduct[(coeffA_ : 1) * a_NonCommutativeMultiply,
+  (coeffB_ : 1) * b_NonCommutativeMultiply] :=
+    coeffA * coeffB * (First@a ** ShuffleProduct[Rest@a, b] +
+        First@b ** ShuffleProduct[a, Rest@b])
+(* Shuffle of single letter and word length > 1*)
+ShuffleProduct[(coeffA_ : 1) * a_Symbol?(! CommutativeQ@# &),
+  (coeffB_ : 1) * b_NonCommutativeMultiply] :=
+    coeffA * coeffB * (a ** b + First@b ** ShuffleProduct[a, Rest@b])
+(* Shuffle of word length > 1 and single letter *)
+ShuffleProduct[(coeffA_ : 1) * a_NonCommutativeMultiply,
+  (coeffB_ : 1) * b_Symbol?(! CommutativeQ@# &)] :=
+    coeffA * coeffB * (First@a ** ShuffleProduct[Rest@a, b] + b ** a)
+(* Shuffle of two letters *)
+ShuffleProduct[(coeffA_ : 1) * a_Symbol?(! CommutativeQ@# &),
+  (coeffB_ : 1) * b_Symbol?(! CommutativeQ@# &)] :=
+    coeffA * coeffB * (a ** b + b ** a)
 
+(*Either argument is a fully commutative expression*)
 ShuffleProduct[a_?CommutativeQ, b_] := a * b
-ShuffleProduct[a_, b_?CommutativeQ] := a * b
+ShuffleProduct[a_, b_?CommutativeQ] := b * a
 
-ShuffleProduct[(c_:1) * HoldPattern[a1_ ** a__], (d_: 1)*HoldPattern[b1_ ** b__]] := 
-    c * d * (a1 ** ShuffleProduct[NonCommutativeMultiply[a], NonCommutativeMultiply[b1, b]] + 
-    b1 ** ShuffleProduct[NonCommutativeMultiply[a1, a], NonCommutativeMultiply[b]])
-
-ShuffleProduct[a1_, (d_:1) * HoldPattern[b1_ ** b__]] :=
-    d * (a1 ** NonCommutativeMultiply[b1, b] + b1 ** ShuffleProduct[a1, NonCommutativeMultiply[b]])
-
-ShuffleProduct[(c_:1) * HoldPattern[a1_ ** a__], b1_] :=
-    c * (a1 ** ShuffleProduct[NonCommutativeMultiply[a], b1] + b1 ** NonCommutativeMultiply[a1, a])
-
-ShuffleProduct[a1_, b1_] := a1 ** b1 + b1 ** a1
+ShuffleProduct[a_, 0] := 0
+ShuffleProduct[0, b_] := 0
 
 (*--------------------------------------------------------------*)
 
