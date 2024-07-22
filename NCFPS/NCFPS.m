@@ -94,6 +94,10 @@ Clear[NCPrefix]
 NCPrefix::usage="\
 NCPrefix[w_p, {w_1, w_2, ...}] returns {w_p**w_1, w_p**w_1, ...}."
 
+Clear[NonCommutativeQ]
+NonCommutativeQ::usage="\
+NonCommutativeQ[c] returns True if the series c is noncommutative, False otherwise. Logical inverse of CommutativeQ[c]."
+
 Clear[ProductPower]
 ProductPower::usage = "\
 ProductPower[f, c, n] applies the product f to series c successively n times.
@@ -554,6 +558,11 @@ NCOrder[a_, x_Symbol] := NCOrderAux[ExpandNonCommutativeMultiply@a, x]
 
 (* NCPrefix *)
 NCPrefix[w_, x_List] := Flatten@Inner[NonCommutativeMultiply, {{w}}, {{x}}, Plus]
+
+(*--------------------------------------------------------------*)
+
+(* NonCommutativeQ *)
+NonCommutativeQ[expr_] := ! CommutativeQ[expr]
 
 (*--------------------------------------------------------------*)
 
